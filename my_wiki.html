@@ -157,6 +157,8 @@ Error message and password prompt
 
 <li>$:/state/toc/Learning-English-209360082</li>
 
+<li>$:/state/toc/Learning-Linux kernel development-209360082</li>
+
 <li>$:/state/toc/Learning-Tiddly features-1637712383</li>
 
 <li>$:/state/toc/Learning-Tiddly features-209360082</li>
@@ -171,13 +173,13 @@ Error message and password prompt
 
 <li>$:/themes/tiddlywiki/vanilla</li>
 
+<li>Build and run custom kernel</li>
+
 <li>Completed</li>
 
 <li>Contents</li>
 
 <li>English</li>
-
-<li>HOWTO build and run custom kernel</li>
 
 <li>Journal</li>
 
@@ -7889,7 +7891,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20170108134855482" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20170109160524292" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -7919,13 +7921,16 @@ Error message and password prompt
 <div created="20170107170148528" modified="20170108101411397" title="$:/state/toc/Learning-English-209360082">
 <pre>close</pre>
 </div>
+<div created="20170109141759614" modified="20170109141759614" title="$:/state/toc/Learning-Linux kernel development-209360082">
+<pre>open</pre>
+</div>
 <div created="20170108093516505" modified="20170108093516505" title="$:/state/toc/Learning-Tiddly features-1637712383">
 <pre>open</pre>
 </div>
-<div created="20170108093422642" modified="20170108101410354" title="$:/state/toc/Learning-Tiddly features-209360082">
-<pre>close</pre>
+<div created="20170108093422642" modified="20170109141549186" title="$:/state/toc/Learning-Tiddly features-209360082">
+<pre>open</pre>
 </div>
-<div list="[[HOWTO build and run custom kernel]] [[Linux kernel development]] [[Preparing environment for kernel development]]" title="$:/StoryList">
+<div list="[[Build and run custom kernel]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8054,6 +8059,54 @@ Error message and password prompt
     }
 }</pre>
 </div>
+<div created="20170108140138482" modified="20170109160516154" tags="[[Linux kernel development]] howto" title="Build and run custom kernel">
+<pre>!!Get kernel sources
+
+Make sure that you have prepared the [[environment|Preparing environment for kernel development]] before building kernel.
+
+First, get kernel sources. 
+You can download or clone them from [[kernel.org|https://www.kernel.org/]].
+
+To clone Greg Kroah-Hartman's staging tree repository type this:
+
+```
+git clone -b staging-testing git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/staging.git
+```
+
+To clone the latest Linus's tree type this:
+
+```
+git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+```
+
+!!Setup your kernel configuration
+When you download a source tree it does not come with .config. There are a lot of ways to make your own. Probably the easiest way is to duplicate .config from your running kernel. To get .config from your running kernel type this:
+
+```
+cp /boot/config-`uname -r`* .config 
+```
+ 
+To update config using a provided .config as a base type this:
+
+```
+make oldconfig
+```
+
+To make changes run this:
+
+```
+make menuconfig
+```
+
+For more information about kernel configuration try run:
+
+```
+make help
+```
+!!Build the kernel
+
+</pre>
+</div>
 <div created="20170108081234328" modified="20170108085616926" tags="Tasks" title="Completed">
 <pre>&lt;$list filter=&quot;[!has[draft.of]tag[task]tag[done]sort[created]]&quot;&gt;
 
@@ -8071,9 +8124,6 @@ Error message and password prompt
 &lt;/div&gt;</pre>
 </div>
 <div created="20170107165932737" modified="20170107165952464" tags="Learning" title="English">
-<pre></pre>
-</div>
-<div created="20170108140138482" modified="20170108140209479" tags="[[Linux kernel development]]" title="HOWTO build and run custom kernel">
 <pre></pre>
 </div>
 <div created="20170107171153456" modified="20170107171153456" tags="Contents" title="Journal">
