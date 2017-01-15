@@ -7891,7 +7891,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20170109160524292" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20170115161149520" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -7930,7 +7930,7 @@ Error message and password prompt
 <div created="20170108093422642" modified="20170109141549186" title="$:/state/toc/Learning-Tiddly features-209360082">
 <pre>open</pre>
 </div>
-<div list="[[Build and run custom kernel]]" title="$:/StoryList">
+<div list="[[Build and run custom kernel]] [[Tickle Lena]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -7947,8 +7947,8 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20170108093501279" modified="20170108093955122" title="$:/temp/search">
-<pre></pre>
+<div created="20170108093501279" modified="20170115123013366" title="$:/temp/search">
+<pre>task</pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.13">
 <pre>{
@@ -8059,7 +8059,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20170108140138482" modified="20170109160516154" tags="[[Linux kernel development]] howto" title="Build and run custom kernel">
+<div created="20170108140138482" modified="20170115161147219" tags="[[Linux kernel development]] howto" title="Build and run custom kernel">
 <pre>!!Get kernel sources
 
 Make sure that you have prepared the [[environment|Preparing environment for kernel development]] before building kernel.
@@ -8105,9 +8105,37 @@ make help
 ```
 !!Build the kernel
 
-</pre>
+To build kernel just run:
+
+```
+make
+```
+
+To make the process faster you could try this:
+
+```
+make -jx
+```
+
+Where x is the number of cores. This number can be less or equal then number of cores on your building host. If you don't know how many cores your machine has try run:
+
+```
+cat /proc/cpuinfo
+```
+
+!!Install the kernel
+
+To install new kernel your distribution has to contain special installkernel script. It is usually located in /sbin/installkernel. This script installs the kernel to /boot/, installs modules and updates bootloader config file. Try run:
+
+```
+sudo make modules_install install
+```
+
+!!Run the kernel
+
+To run new kernel just reboot your machine.</pre>
 </div>
-<div created="20170108081234328" modified="20170108085616926" tags="Tasks" title="Completed">
+<div created="20170108081234328" modified="20170115122951632" tags="Tasks" title="Completed">
 <pre>&lt;$list filter=&quot;[!has[draft.of]tag[task]tag[done]sort[created]]&quot;&gt;
 
 &lt;$checkbox tag=&quot;done&quot;&gt;~~
@@ -8282,7 +8310,7 @@ This tells git your name and email, so that it can be used in the authorship inf
 <div created="20170107163619427" modified="20170108101046015" tags="Contents" title="Tasks">
 <pre>&lt;&lt;list-links &quot;[tag[Tasks]]&quot;&gt;&gt;</pre>
 </div>
-<div created="20170108081450310" modified="20170108130157510" tags="task" title="Tickle Lena">
+<div created="20170108081450310" modified="20170115122730655" tags="task done" title="Tickle Lena">
 <pre></pre>
 </div>
 <div created="20170108093402664" modified="20170108101019455" tags="Learning" title="Tiddly features">
