@@ -205,6 +205,10 @@ Error message and password prompt
 
 <li>Run your script when new device plugged in</li>
 
+<li>Simple misc char device driver</li>
+
+<li>Simple module which will be downloaded when any usb kbd plugged in</li>
+
 <li>Starship Troopers</li>
 
 <li>Tasks</li>
@@ -7915,7 +7919,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20170212130513220" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20170226182802275" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -7957,7 +7961,7 @@ Error message and password prompt
 <div created="20170108093422642" modified="20170212091112926" title="$:/state/toc/Learning-Tiddly features-209360082">
 <pre>open</pre>
 </div>
-<div list="" title="$:/StoryList">
+<div list="[[Simple misc char device driver]] [[Linux kernel development]] [[Simple module which will be downloaded when any usb kbd plugged in]] [[Run your script when new device plugged in]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8613,7 +8617,7 @@ Create a file called .gitconfig in your home and add lines like this:
 This tells git your name and email, so that it can be used in the authorship information in the git commit.
 </pre>
 </div>
-<div created="20170205181612133" modified="20170212130414588" tags="[[Linux kernel development]] howto" title="Run your script when new device plugged in">
+<div created="20170205181612133" modified="20170225153535729" tags="[[Linux kernel development]] howto" title="Run your script when new device plugged in">
 <pre>!!Usefull links:
 
 [[Linux device drivers, chapter 14|https://lwn.net/Kernel/LDD3/]]
@@ -8641,6 +8645,65 @@ ACTION==&quot;add&quot;, SUBSYSTEMS==&quot;usb&quot;, ATTR{bInterfaceClass}==&qu
 
 This rule means to run script ``/home/algoritmist/stuff/start.sh`` every time when any usb keyboard plugged in.
 </pre>
+</div>
+<div created="20170225155440106" modified="20170226182800453" tags="" title="Simple misc char device driver">
+<pre>!!Useful links
+
+[[Linux device drivers, chapter 3|https://static.lwn.net/images/pdf/LDD3/ch03.pdf]]
+
+[[Article about misc char drivers|http://www.linuxjournal.com/article/2920]]
+
+</pre>
+</div>
+<div created="20170225151030485" modified="20170225155551833" tags="[[Linux kernel development]] howto" title="Simple module which will be downloaded when any usb kbd plugged in">
+<pre>!!Usefull links:
+
+[[Linux device drivers, chapter 14|https://lwn.net/Kernel/LDD3/]]
+
+[[About Modalias|https://wiki.archlinux.org/index.php/Modalias#Where_does_this_modules.alias_file_come_from.3F]]
+
+[[Good question on Stack Overflow|http://stackoverflow.com/questions/23307579/loading-module-on-keyboard-hotplug]]
+
+[[About udev scripting|Run your script when new device plugged in]]
+
+[[Good example from Linux source|http://lxr.free-electrons.com/source/drivers/hid/usbhid/usbkbd.c]]
+
+[[How to write simple kernel module|Hello world]]
+
+!!Modify your module source code
+
+Make //usb_device_id// table to identify usb device and use special macros MODULE_DEVICE_TABLE to export this table to userspace. Add this code to your module:
+
+ ```
+static struct usb_device_id usb_hello_kbd_table [] = {
+       { USB_INTERFACE_INFO(USB_INTERFACE_CLASS_HID, USB_INTERFACE_SUBCLASS_BOOT,
+               USB_INTERFACE_PROTOCOL_KEYBOARD) },
+       {}
+ };
+
+ MODULE_DEVICE_TABLE (usb, usb_hello_kbd_table);
+```
+
+!!Rebuild and install your module to kernel
+
+To install module make a link on it to the ///lib/modules///. For example, if your module is located in your $HOME try this:
+
+```
+sudo ln -s ~/hello.ko /lib/modules/`uname -r`/hello.ko
+```
+
+
+To make alias for module run this:
+
+```
+sudo depmod -a
+```
+
+Try to plugg in any usb keyboard and watch your module loading
+
+```
+lsmod
+```</pre>
 </div>
 <div created="20170115163105226" modified="20170115163133464" tags="Books" title="Starship Troopers">
 <pre></pre>
