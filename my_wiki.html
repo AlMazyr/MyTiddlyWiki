@@ -185,6 +185,8 @@ Error message and password prompt
 
 <li>English</li>
 
+<li>GIT</li>
+
 <li>Hello world</li>
 
 <li>House of cards</li>
@@ -200,6 +202,8 @@ Error message and password prompt
 <li>mutt</li>
 
 <li>Planning</li>
+
+<li>Prepare patchset with git format-patch</li>
 
 <li>Preparing environment for kernel development</li>
 
@@ -7919,7 +7923,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20170226182802275" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20170320063534415" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -7949,19 +7953,19 @@ Error message and password prompt
 <div created="20170107170321016" modified="20170115162917144" title="$:/state/toc/English-TV series-209360082">
 <pre>open</pre>
 </div>
-<div created="20170107170148528" modified="20170212090821017" title="$:/state/toc/Learning-English-209360082">
+<div created="20170107170148528" modified="20170320054927155" title="$:/state/toc/Learning-English-209360082">
 <pre>close</pre>
 </div>
-<div created="20170109141759614" modified="20170212091119950" title="$:/state/toc/Learning-Linux kernel development-209360082">
+<div created="20170109141759614" modified="20170320055610935" title="$:/state/toc/Learning-Linux kernel development-209360082">
 <pre>open</pre>
 </div>
 <div created="20170108093516505" modified="20170108093516505" title="$:/state/toc/Learning-Tiddly features-1637712383">
 <pre>open</pre>
 </div>
-<div created="20170108093422642" modified="20170212091112926" title="$:/state/toc/Learning-Tiddly features-209360082">
-<pre>open</pre>
+<div created="20170108093422642" modified="20170320055125601" title="$:/state/toc/Learning-Tiddly features-209360082">
+<pre>close</pre>
 </div>
-<div list="[[Simple misc char device driver]] [[Linux kernel development]] [[Simple module which will be downloaded when any usb kbd plugged in]] [[Run your script when new device plugged in]]" title="$:/StoryList">
+<div list="[[Prepare patchset with git format-patch]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8187,6 +8191,9 @@ To run new kernel just reboot your machine.</pre>
 </div>
 <div created="20170107165932737" modified="20170115163143904" tags="Learning" title="English">
 <pre>&lt;&lt;list-links &quot;[tag[English]]&quot;&gt;&gt;</pre>
+</div>
+<div created="20170320055133278" modified="20170320055255713" tags="Learning" title="GIT">
+<pre>&lt;&lt;list-links &quot;[tag[GIT]]&quot;&gt;&gt;</pre>
 </div>
 <div created="20170204162502906" modified="20170204164437609" tags="[[Linux kernel development]]" title="Hello world">
 <pre>! Simple kernel source code example
@@ -8428,7 +8435,7 @@ You can see log messages from your module in `/val/log/syslog`</pre>
 <div created="20170107171153456" modified="20170107171153456" tags="Contents" title="Journal">
 <pre></pre>
 </div>
-<div created="20170107163643280" modified="20170212090943031" tags="Contents" title="Learning">
+<div created="20170107163643280" modified="20170320055239683" tags="Contents" title="Learning">
 <pre>&lt;&lt;list-links &quot;[tag[Learning]]&quot;&gt;&gt;</pre>
 </div>
 <div created="20170108101817156" modified="20170108135118426" tags="Learning" title="Linux kernel development">
@@ -8515,6 +8522,42 @@ starttls required~
 </div>
 <div created="20170115162523010" modified="20170115162741851" tags="Contents" title="Planning">
 <pre>&lt;&lt;list-links &quot;[tag[Tasks]]&quot;&gt;&gt;</pre>
+</div>
+<div created="20170320055259436" modified="20170320063523289" tags="GIT" title="Prepare patchset with git format-patch">
+<pre>!! Usefull links:
+
+[[Firstpatch from kernelnewbies.com|https://kernelnewbies.org/Outreachyfirstpatch?action=show&amp;redirect=OPWfirstpatch#kernel-setup-done]]
+
+[[About kernel patches|http://halobates.de/on-submitting-patches.pdf]]
+
+[[Submitting patches process|http://halobates.de/on-submitting-patches.pdf]]
+
+[[Create patches with git format-patch|http://stackoverflow.com/questions/6658313/generate-a-git-patch-for-a-specific-commit]]
+
+[[Git format-patch doc|https://git-scm.com/docs/git-format-patch]]
+
+!!Make set of commits with your changes
+
+```
+echo &quot;First commit!&quot; &gt;&gt; file
+git add file
+git commit -m &quot;first commit&quot;
+echo &quot;Second commit!&quot; &gt;&gt; file
+git add file
+git commit -m &quot;second commit&quot;
+```
+
+!!To prepare patchset from your commits:
+
+```
+git format-patch -2 HEAD
+```
+
+!!The same In a single patch file:
+```
+git format-patch -2 HEAD --stdout &gt; 0001-last-2-commits.patch
+```
+</pre>
 </div>
 <div created="20170108101949498" modified="20170108135024802" tags="[[Linux kernel development]]" title="Preparing environment for kernel development">
 <pre>!Install packages:
@@ -8655,7 +8698,7 @@ This rule means to run script ``/home/algoritmist/stuff/start.sh`` every time wh
 
 </pre>
 </div>
-<div created="20170225151030485" modified="20170225155551833" tags="[[Linux kernel development]] howto" title="Simple module which will be downloaded when any usb kbd plugged in">
+<div created="20170225151030485" modified="20170320063537592" tags="[[Linux kernel development]] howto" title="Simple module which will be downloaded when any usb kbd plugged in">
 <pre>!!Usefull links:
 
 [[Linux device drivers, chapter 14|https://lwn.net/Kernel/LDD3/]]
