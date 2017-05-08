@@ -159,6 +159,8 @@ Error message and password prompt
 
 <li>$:/state/toc/Learning-English-209360082</li>
 
+<li>$:/state/toc/Learning-GIT TIPS-209360082</li>
+
 <li>$:/state/toc/Learning-GIT-209360082</li>
 
 <li>$:/state/toc/Learning-Linux kernel development-209360082</li>
@@ -177,6 +179,8 @@ Error message and password prompt
 
 <li>$:/themes/tiddlywiki/vanilla</li>
 
+<li>Add new remote and checkout a branch from it.</li>
+
 <li>Books</li>
 
 <li>Build and run custom kernel</li>
@@ -187,7 +191,7 @@ Error message and password prompt
 
 <li>English</li>
 
-<li>GIT</li>
+<li>GIT TIPS</li>
 
 <li>Hello world</li>
 
@@ -7925,7 +7929,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20170327064012325" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20170508170601727" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -7958,6 +7962,9 @@ Error message and password prompt
 <div created="20170107170148528" modified="20170320054927155" title="$:/state/toc/Learning-English-209360082">
 <pre>close</pre>
 </div>
+<div created="20170508170632807" modified="20170508170750734" title="$:/state/toc/Learning-GIT TIPS-209360082">
+<pre>open</pre>
+</div>
 <div created="20170327060502244" modified="20170327060502244" title="$:/state/toc/Learning-GIT-209360082">
 <pre>open</pre>
 </div>
@@ -7970,7 +7977,7 @@ Error message and password prompt
 <div created="20170108093422642" modified="20170320055125601" title="$:/state/toc/Learning-Tiddly features-209360082">
 <pre>close</pre>
 </div>
-<div list="[[Prepare and send a patchset]]" title="$:/StoryList">
+<div list="[[Add new remote and checkout a branch from it.]] [[GIT TIPS]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8099,6 +8106,42 @@ Error message and password prompt
     }
 }</pre>
 </div>
+<div created="20170508164734500" modified="20170508170659119" tags="[[GIT TIPS]]" title="Add new remote and checkout a branch from it.">
+<pre>!! Usefull links:
+
+[[Working with remotes|https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes]]
+
+[[Branches|https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging]]
+
+!! Add and fetch new remote
+
+```
+$ git remote
+origin
+$ git remote add my-wiki https://github.com/AlMazyr/MyTiddlyWiki
+$ git remote
+origin
+my-wiki
+$ git fetch my-wiki
+```
+
+!!Checkout new branch from remote
+
+```
+$ git branch
+* master
+$ git branch -r
+origin/HEAD -&gt; origin/master
+origin/master
+my-wiki/master
+$ git branch my-wiki-master my-wiki/master
+$ git checkout my-wiki-master
+$ git branch
+* my-wiki-master
+master
+```
+</pre>
+</div>
 <div created="20170115163009035" modified="20170115163155560" tags="English" title="Books">
 <pre>&lt;&lt;list-links &quot;[tag[Books]]&quot;&gt;&gt;</pre>
 </div>
@@ -8197,8 +8240,8 @@ To run new kernel just reboot your machine.</pre>
 <div created="20170107165932737" modified="20170115163143904" tags="Learning" title="English">
 <pre>&lt;&lt;list-links &quot;[tag[English]]&quot;&gt;&gt;</pre>
 </div>
-<div created="20170320055133278" modified="20170320055255713" tags="Learning" title="GIT">
-<pre>&lt;&lt;list-links &quot;[tag[GIT]]&quot;&gt;&gt;</pre>
+<div created="20170320055133278" modified="20170508170730671" tags="Learning" title="GIT TIPS">
+<pre>&lt;&lt;list-links &quot;[tag[GIT TIPS]]&quot;&gt;&gt;</pre>
 </div>
 <div created="20170204162502906" modified="20170204164437609" tags="[[Linux kernel development]]" title="Hello world">
 <pre>! Simple kernel source code example
@@ -8528,7 +8571,7 @@ starttls required~
 <div created="20170115162523010" modified="20170115162741851" tags="Contents" title="Planning">
 <pre>&lt;&lt;list-links &quot;[tag[Tasks]]&quot;&gt;&gt;</pre>
 </div>
-<div created="20170320055259436" modified="20170327063931064" tags="GIT" title="Prepare and send a patchset">
+<div created="20170320055259436" modified="20170508170630697" tags="[[GIT TIPS]]" title="Prepare and send a patchset">
 <pre>!! Usefull links:
 
 [[Firstpatch from kernelnewbies.com|https://kernelnewbies.org/Outreachyfirstpatch?action=show&amp;redirect=OPWfirstpatch#kernel-setup-done]]
