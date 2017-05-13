@@ -211,6 +211,8 @@ Error message and password prompt
 
 <li>Prepare and send a patchset</li>
 
+<li>Prepare and send kernel patch</li>
+
 <li>Preparing environment for kernel development</li>
 
 <li>Run your script when new device plugged in</li>
@@ -7929,7 +7931,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20170508170601727" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20170513163928070" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -7977,7 +7979,7 @@ Error message and password prompt
 <div created="20170108093422642" modified="20170320055125601" title="$:/state/toc/Learning-Tiddly features-209360082">
 <pre>close</pre>
 </div>
-<div list="[[Add new remote and checkout a branch from it.]] [[GIT TIPS]]" title="$:/StoryList">
+<div list="[[Prepare and send kernel patch]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8106,7 +8108,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20170508164734500" modified="20170508170659119" tags="[[GIT TIPS]]" title="Add new remote and checkout a branch from it.">
+<div created="20170508164734500" modified="20170513163756735" tags="[[GIT TIPS]]" title="Add new remote and checkout a branch from it.">
 <pre>!! Usefull links:
 
 [[Working with remotes|https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes]]
@@ -8571,7 +8573,7 @@ starttls required~
 <div created="20170115162523010" modified="20170115162741851" tags="Contents" title="Planning">
 <pre>&lt;&lt;list-links &quot;[tag[Tasks]]&quot;&gt;&gt;</pre>
 </div>
-<div created="20170320055259436" modified="20170508170630697" tags="[[GIT TIPS]]" title="Prepare and send a patchset">
+<div created="20170320055259436" modified="20170513164009504" tags="[[GIT TIPS]] [[Linux kernel development]]" title="Prepare and send a patchset">
 <pre>!! Usefull links:
 
 [[Firstpatch from kernelnewbies.com|https://kernelnewbies.org/Outreachyfirstpatch?action=show&amp;redirect=OPWfirstpatch#kernel-setup-done]]
@@ -8639,6 +8641,58 @@ git send-email --to alem0203@yandex.ru --chain-reply-to ./patches/*.patch
 ```
 git send-email --to alem0203@yandex.ru --in-reply-to='some_mail_id' ./patches/*.patch
 ```</pre>
+</div>
+<div created="20170513155935974" modified="20170513163746194" tags="[[Linux kernel development]]" title="Prepare and send kernel patch">
+<pre>!!Usefull links
+
+[[First patch HOWTO from kernelnewbies|https://kernelnewbies.org/FirstKernelPatch#head-e9907c3b20ae2fc3e0b82d0eec3292d8c13dd7ef]]
+
+[[Patch philosophy|https://kernelnewbies.org/PatchPhilosophy]]
+
+[[Official documentation|http://elixir.free-electrons.com/linux/latest/source/Documentation/process/submitting-patches.rst]]
+
+!! Make a new branch for your changes
+
+```
+$ git checkout -b new_feature 
+$ git branch 
+  master
+* new_feature
+```
+
+!! Make your changes
+
+```
+# added some new feature here
+$ git add new_feature
+$ git commit
+
+```
+
+!! Create patch using git format-patch
+
+```
+$ git format-patch master..new_feature
+
+```
+
+!! Find responosible for your patch review
+
+```
+$ ./scripts/get_maintainer.pl my_cool_patch.patch
+Random Developer &lt;random@developer.org&gt;
+linux-kernel@vger.kernel.org (open list)
+```
+
+!! Send your patch on review 
+
+```
+$ git send-email --to Random Developer &lt;random@developer.org&gt; --cc linux-kernel@vger.kernel.org my_cool_patch.patch
+
+```
+
+!! Wait for response
+</pre>
 </div>
 <div created="20170108101949498" modified="20170108135024802" tags="[[Linux kernel development]]" title="Preparing environment for kernel development">
 <pre>!Install packages:
