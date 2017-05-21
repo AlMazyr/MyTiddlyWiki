@@ -185,6 +185,8 @@ Error message and password prompt
 
 <li>Build and run custom kernel</li>
 
+<li>Build and run Debian/Ubuntu kernel</li>
+
 <li>Completed</li>
 
 <li>Contents</li>
@@ -192,6 +194,8 @@ Error message and password prompt
 <li>English</li>
 
 <li>GIT TIPS</li>
+
+<li>Handy log</li>
 
 <li>Hello world</li>
 
@@ -7931,7 +7935,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20170513163928070" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20170521153116279" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -7979,7 +7983,7 @@ Error message and password prompt
 <div created="20170108093422642" modified="20170320055125601" title="$:/state/toc/Learning-Tiddly features-209360082">
 <pre>close</pre>
 </div>
-<div list="[[Prepare and send kernel patch]]" title="$:/StoryList">
+<div list="[[Build and run Debian/Ubuntu kernel]] [[Build and run custom kernel]] [[Handy log]] [[Add new remote and checkout a branch from it.]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8147,7 +8151,7 @@ master
 <div created="20170115163009035" modified="20170115163155560" tags="English" title="Books">
 <pre>&lt;&lt;list-links &quot;[tag[Books]]&quot;&gt;&gt;</pre>
 </div>
-<div created="20170108140138482" modified="20170204162712440" tags="[[Linux kernel development]] howto" title="Build and run custom kernel">
+<div created="20170108140138482" modified="20170521153047911" tags="[[Linux kernel development]] howto" title="Build and run custom kernel">
 <pre>!!Get kernel sources
 
 Make sure that you have prepared the [[environment|Preparing environment for kernel development]] before building kernel.
@@ -8223,6 +8227,108 @@ sudo make modules_install install
 
 To run new kernel just reboot your machine.</pre>
 </div>
+<div created="20170521150030382" modified="20170521152951257" tags="howto [[Linux kernel development]]" title="Build and run Debian/Ubuntu kernel">
+<pre>!! Install kernel sources and headers
+
+Figure out your kernel release
+
+```
+$ uname -r
+3.16.0-4-amd64
+```
+
+Search linux-header package for your kernel release
+
+```
+$ sudo apt-cache search linux-header
+linux-headers-3.16.0-4-586 - Header files for Linux 3.16.0-4-586
+linux-headers-3.16.0-4-686-pae - Header files for Linux 3.16.0-4-686-pae
+linux-headers-3.16.0-4-all - All header files for Linux 3.16 (meta-package)
+linux-headers-3.16.0-4-all-amd64 - All header files for Linux 3.16 (meta-package)
+linux-headers-3.16.0-4-all-i386 - All header files for Linux 3.16 (meta-package)
+linux-headers-3.16.0-4-amd64 - Header files for Linux 3.16.0-4-amd64
+linux-headers-3.16.0-4-common - Common header files for Linux 3.16.0-4
+...
+```
+
+Install it!
+
+```
+$ sudo apt-get install linux-headers-3.16.0-4-amd64
+```
+
+Same for linux-source
+
+```
+$ sudo apt-cache search linux-source
+linux-source-3.16 - Linux kernel source for version 3.16 with Debian patches
+linux-source - Linux kernel source (meta-package)
+$ sudo apt-get install linux-source-3.16
+```
+
+!! Setup kernel configuration
+
+Extraxt kernel sources
+
+```
+$ cd /usr/src/
+$ tar xjf linux-source-3.16.tar.bz2
+```
+
+Copy Module.symvers from headers
+
+```
+$ cd /usr/src/linux-source-3.16
+$ cp ../linux-headers-3.16.0-4-amd64/Module.symvers .
+```
+
+Update .config file
+
+```
+$ make oldconfig
+```
+To make changes in the kernel configuration run
+
+```
+$ make menuconfig
+```
+
+!! Build kernel
+
+```
+$ make
+```
+
+To make the process faster you could try this
+
+```
+$ make -jx
+```
+
+Where x is the number of cores. This number can be less or equal then number of cores on your building host. If you don't know how many cores your machine has try run
+
+```
+$ cat /proc/cpuinfo
+```
+
+To make modules run
+
+```
+$ make modules
+```
+
+
+!!Install the kernel
+
+```
+$ sudo make modules_install install
+```
+
+!!Run the kernel
+
+To run new kernel just reboot your machine.
+</pre>
+</div>
 <div created="20170108081234328" modified="20170115162720595" tags="Tasks" title="Completed">
 <pre>&lt;$list filter=&quot;[!has[draft.of]tag[task]tag[done]sort[created]]&quot;&gt;
 
@@ -8244,6 +8350,13 @@ To run new kernel just reboot your machine.</pre>
 </div>
 <div created="20170320055133278" modified="20170508170730671" tags="Learning" title="GIT TIPS">
 <pre>&lt;&lt;list-links &quot;[tag[GIT TIPS]]&quot;&gt;&gt;</pre>
+</div>
+<div created="20170514184303931" modified="20170514184654579" tags="[[GIT TIPS]]" title="Handy log">
+<pre>!!Compact form of the commit log message
+
+```
+$ git log --pretty=oneline --abbrev-commit
+```</pre>
 </div>
 <div created="20170204162502906" modified="20170204164437609" tags="[[Linux kernel development]]" title="Hello world">
 <pre>! Simple kernel source code example
