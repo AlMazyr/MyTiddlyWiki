@@ -165,6 +165,8 @@ Error message and password prompt
 
 <li>$:/state/toc/Learning-Linux kernel development-209360082</li>
 
+<li>$:/state/toc/Learning-System management-209360082</li>
+
 <li>$:/state/toc/Learning-Tiddly features-1637712383</li>
 
 <li>$:/state/toc/Learning-Tiddly features-209360082</li>
@@ -190,6 +192,8 @@ Error message and password prompt
 <li>Build and run Debian/Ubuntu kernel</li>
 
 <li>Build single module from kernel tree</li>
+
+<li>Change font size</li>
 
 <li>Completed</li>
 
@@ -234,6 +238,8 @@ Error message and password prompt
 <li>Simple module which will be downloaded when any usb kbd plugged in</li>
 
 <li>Starship Troopers</li>
+
+<li>System management</li>
 
 <li>Tasks</li>
 
@@ -7945,7 +7951,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20170528142504195" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20170604151313882" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -7987,16 +7993,19 @@ Error message and password prompt
 <div created="20170109141759614" modified="20170527143058250" title="$:/state/toc/Learning-Linux kernel development-209360082">
 <pre>close</pre>
 </div>
+<div created="20170604150217022" modified="20170604150217022" title="$:/state/toc/Learning-System management-209360082">
+<pre>open</pre>
+</div>
 <div created="20170108093516505" modified="20170108093516505" title="$:/state/toc/Learning-Tiddly features-1637712383">
 <pre>open</pre>
 </div>
 <div created="20170108093422642" modified="20170320055125601" title="$:/state/toc/Learning-Tiddly features-209360082">
 <pre>close</pre>
 </div>
-<div created="20170528135638216" modified="20170528135649319" title="$:/state/toc/Learning-unsorted-209360082">
+<div created="20170528135638216" modified="20170604150150366" title="$:/state/toc/Learning-unsorted-209360082">
 <pre>close</pre>
 </div>
-<div list="[[Manage wi-fi connection]] [[Make BIOS and UEFI bootable usb using dd]] English unsorted Learning" title="$:/StoryList">
+<div list="[[System management]] [[Change font size]] [[Manage wi-fi connection]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8379,6 +8388,34 @@ $ modprobe i2c-i801
 ```
 </pre>
 </div>
+<div created="20170604150245850" modified="20170604151251780" tags="[[System management]] howto arch" title="Change font size">
+<pre>!! Show all fonts
+
+```
+$ ls -la /usr/share/kbd/consolefonts/
+```
+
+!! Preview new font
+
+```
+$ setfont iso02-12x22
+```
+
+!! Save new font
+
+To save new font use `FONT` variable in `/etc/vconsole.conf`
+
+```
+FONT=iso02-12x22
+```
+
+For more information try 
+
+```
+$ man 5 vconsole.conf
+```
+</pre>
+</div>
 <div created="20170108081234328" modified="20170115162720595" tags="Tasks" title="Completed">
 <pre>&lt;$list filter=&quot;[!has[draft.of]tag[task]tag[done]sort[created]]&quot;&gt;
 
@@ -8395,7 +8432,7 @@ $ modprobe i2c-i801
 &lt;&lt;toc-selective-expandable 'Contents' sort[title]&gt;&gt;
 &lt;/div&gt;</pre>
 </div>
-<div created="20170107165932737" modified="20170527145235205" tags="Learning" title="English">
+<div created="20170107165932737" modified="20170604150112175" tags="Learning" title="English">
 <pre>&lt;&lt;list-links &quot;[tag[English]]&quot;&gt;&gt;</pre>
 </div>
 <div created="20170320055133278" modified="20170508170730671" tags="Learning" title="GIT TIPS">
@@ -8672,7 +8709,7 @@ $ dd bs=4M if=/path/to/your_fancy_image.iso | pv | dd of=/dev/sdx
 !! Ready
 </pre>
 </div>
-<div created="20170528135510931" modified="20170528142412806" tags="howto unsorted" title="Manage wi-fi connection">
+<div created="20170528135510931" modified="20170604150214904" tags="howto [[System management]]" title="Manage wi-fi connection">
 <pre>!! Interface up
 Check your wireless interface status
 
@@ -9122,6 +9159,9 @@ lsmod
 </div>
 <div created="20170115163105226" modified="20170115163133464" tags="Books" title="Starship Troopers">
 <pre></pre>
+</div>
+<div created="20170604150033084" modified="20170604150135184" tags="Learning" title="System management">
+<pre>&lt;&lt;list-links &quot;[tag[System management]]&quot;&gt;&gt;</pre>
 </div>
 <div created="20170107163619427" modified="20170115162550588" tags="Contents" title="Tasks">
 <pre>&lt;&lt;list-links &quot;[tag[Tasks]]&quot;&gt;&gt;</pre>
