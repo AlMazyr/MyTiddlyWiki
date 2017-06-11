@@ -217,6 +217,8 @@ Error message and password prompt
 
 <li>Make BIOS and UEFI bootable usb using dd</li>
 
+<li>Make initrd/initramfs</li>
+
 <li>Manage wi-fi connection</li>
 
 <li>Markup fetures</li>
@@ -256,6 +258,8 @@ Error message and password prompt
 <li>TV series</li>
 
 <li>unsorted</li>
+
+<li>Update grub2 configuration</li>
 
 <li>Usefull tools howtos</li>
 
@@ -7951,7 +7955,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20170604151313882" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20170611160504913" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -8005,7 +8009,7 @@ Error message and password prompt
 <div created="20170528135638216" modified="20170604150150366" title="$:/state/toc/Learning-unsorted-209360082">
 <pre>close</pre>
 </div>
-<div list="[[System management]] [[Change font size]] [[Manage wi-fi connection]]" title="$:/StoryList">
+<div list="[[Update grub2 configuration]] [[Make initrd/initramfs]] [[System management]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8709,6 +8713,31 @@ $ dd bs=4M if=/path/to/your_fancy_image.iso | pv | dd of=/dev/sdx
 !! Ready
 </pre>
 </div>
+<div created="20170611152609767" modified="20170611154621756" tags="arch howto [[System management]]" title="Make initrd/initramfs">
+<pre>!! Arch linux
+
+Arch distribution uses ''initramfs''. 
+
+To make new initramfs for custom kernel use mkinitcpio
+
+```
+$ mkinitcpio -k &lt;kernel version&gt; -g /boot/initramfs-&lt;file-name&gt;.img
+```
+
+You can find kernel version from //''/lib/modules''//
+
+For example, for kernel 4.12
+
+```
+$ mkinitcpio -k 4.12.0 -g /boot/initramfs-4.12.0.img
+```
+To generate initramfs for stock Arch kernel
+
+```
+$ mkinitcpio -p linux
+```
+</pre>
+</div>
 <div created="20170528135510931" modified="20170604150214904" tags="howto [[System management]]" title="Manage wi-fi connection">
 <pre>!! Interface up
 Check your wireless interface status
@@ -9199,6 +9228,18 @@ lsmod
 </div>
 <div created="20170527145131104" modified="20170527145253171" tags="Learning" title="unsorted">
 <pre>&lt;&lt;list-links &quot;[tag[unsorted]]&quot;&gt;&gt;</pre>
+</div>
+<div created="20170611154636608" modified="20170611160502580" tags="arch howto [[System management]]" title="Update grub2 configuration">
+<pre>!!Arch 
+
+```
+$ grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+!!Ubuntu/Debian
+
+```
+$ update-grub</pre>
 </div>
 <div created="20170212090848170" modified="20170212090940729" tags="Contents" title="Usefull tools howtos">
 <pre>&lt;&lt;list-links &quot;[tag[Usefull tools howtos]]&quot;&gt;&gt;</pre>
