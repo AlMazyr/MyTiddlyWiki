@@ -199,7 +199,13 @@ Error message and password prompt
 
 <li>Contents</li>
 
+<li>Draft of 'Add new remote and checkout a branch from it.'</li>
+
+<li>Draft of 'Make initrd/initramfs'</li>
+
 <li>English</li>
+
+<li>Fast kernel module development with QEMU</li>
 
 <li>GIT TIPS</li>
 
@@ -224,6 +230,8 @@ Error message and password prompt
 <li>Markup fetures</li>
 
 <li>mutt</li>
+
+<li>Patch versioning</li>
 
 <li>Planning</li>
 
@@ -7955,7 +7963,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20170611160504913" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20170624133207676" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -7988,14 +7996,14 @@ Error message and password prompt
 <div created="20170107170148528" modified="20170320054927155" title="$:/state/toc/Learning-English-209360082">
 <pre>close</pre>
 </div>
-<div created="20170508170632807" modified="20170527143057141" title="$:/state/toc/Learning-GIT TIPS-209360082">
-<pre>close</pre>
+<div created="20170508170632807" modified="20170612164634322" title="$:/state/toc/Learning-GIT TIPS-209360082">
+<pre>open</pre>
 </div>
 <div created="20170327060502244" modified="20170327060502244" title="$:/state/toc/Learning-GIT-209360082">
 <pre>open</pre>
 </div>
-<div created="20170109141759614" modified="20170527143058250" title="$:/state/toc/Learning-Linux kernel development-209360082">
-<pre>close</pre>
+<div created="20170109141759614" modified="20170612164459208" title="$:/state/toc/Learning-Linux kernel development-209360082">
+<pre>open</pre>
 </div>
 <div created="20170604150217022" modified="20170604150217022" title="$:/state/toc/Learning-System management-209360082">
 <pre>open</pre>
@@ -8009,7 +8017,7 @@ Error message and password prompt
 <div created="20170528135638216" modified="20170604150150366" title="$:/state/toc/Learning-unsorted-209360082">
 <pre>close</pre>
 </div>
-<div list="[[Update grub2 configuration]] [[Make initrd/initramfs]] [[System management]]" title="$:/StoryList">
+<div list="[[Build single module from kernel tree]] [[Fast kernel module development with QEMU]] [[Draft of 'Make initrd/initramfs']] [[Draft of 'Add new remote and checkout a branch from it.']] [[Handy log]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8436,8 +8444,105 @@ $ man 5 vconsole.conf
 &lt;&lt;toc-selective-expandable 'Contents' sort[title]&gt;&gt;
 &lt;/div&gt;</pre>
 </div>
+<div created="20170508164734500" draft.of="Add new remote and checkout a branch from it." draft.title="Add new remote and checkout a branch from it." modified="20170624131020625" tags="[[GIT TIPS]]" title="Draft of 'Add new remote and checkout a branch from it.'">
+<pre>!! Usefull links:
+
+[[Working with remotes|https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes]]
+
+[[Branches|https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging]]
+
+!! Add and fetch new remote
+
+```
+$ git remote
+origin
+$ git remote add my-wiki https://github.com/AlMazyr/MyTiddlyWiki
+$ git remote
+origin
+my-wiki
+$ git fetch my-wiki
+```
+
+!!Checkout new branch from remote
+
+```
+$ git branch
+* master
+$ git branch -r
+origin/HEAD -&gt; origin/master
+origin/master
+my-wiki/master
+$ git branch my-wiki-master my-wiki/master
+$ git checkout my-wiki-master
+$ git branch
+* my-wiki-master
+master
+```
+</pre>
+</div>
+<div created="20170611152609767" draft.of="Make initrd/initramfs" draft.title="Make initrd/initramfs" modified="20170624130253787" tags="arch howto [[System management]]" title="Draft of 'Make initrd/initramfs'">
+<pre>!! Arch linux
+
+Arch distribution uses ''initramfs''. 
+
+To make new initramfs for custom kernel use mkinitcpio
+
+```
+$ mkinitcpio -k &lt;kernel version&gt; -g /boot/initramfs-&lt;file-name&gt;.img
+```
+
+You can find kernel version from //''/lib/modules''//
+
+For example, for kernel 4.12
+
+```
+$ mkinitcpio -k 4.12.0 -g /boot/initramfs-4.12.0.img
+```
+To generate initramfs for stock Arch kernel
+
+```
+$ mkinitcpio -p linux
+```
+</pre>
+</div>
 <div created="20170107165932737" modified="20170604150112175" tags="Learning" title="English">
 <pre>&lt;&lt;list-links &quot;[tag[English]]&quot;&gt;&gt;</pre>
+</div>
+<div created="20170624130140837" modified="20170624133156063" tags="[[Linux kernel development]] [[System management]] howto" title="Fast kernel module development with QEMU">
+<pre>!!Rebuild your kernel module
+
+```
+make M=drivers/i2c/busses/
+```
+
+!! Add your module to initramfs image
+
+In Arch use [[mkinitcpio|https://wiki.archlinux.org/index.php/Mkinitcpio]] to create custom initramfs image.
+
+Add your module to /etc/mkinitcpio.conf:
+
+```
+MODULES=&quot;my_module&quot;
+```
+Or in other way:
+
+```
+FILES=&quot;/lib/modules/4.12.0-rc4-ARCH+/kernel/my_module.ko&quot;
+```
+
+Make initramfs for kernel 4.12-rc4:
+
+```
+mkinitcpio -c /etc/mkinitcpio.conf -k 4.12.0-rc4 -g /boot/initramfs-4.12.0-rc4.img
+```
+
+For distro independent initramfs creation use [[gen_init_cpio|https://github.com/torvalds/linux/blob/master/usr/gen_init_cpio.c]]
+
+!! Run [[qemu|http://wiki.qemu.org/Main_Page]]
+
+```
+qemu-system-x86_64 -kernel /boot/vmlinuz-4.12.0-rc4-ARCH+ -initrd /home/alem/git/kernels/linux-main/usr/initramfs.img -append 'console=ttyS0' -nographic
+```</pre>
 </div>
 <div created="20170320055133278" modified="20170508170730671" tags="Learning" title="GIT TIPS">
 <pre>&lt;&lt;list-links &quot;[tag[GIT TIPS]]&quot;&gt;&gt;</pre>
@@ -8872,6 +8977,9 @@ username &quot;algoritmist1618@gmail.com&quot;
 password &quot;my_real_password&quot;
 starttls required~
 ```</pre>
+</div>
+<div created="20170612181235210" modified="20170612181306638" tags="[[Linux kernel development]] howto" title="Patch versioning">
+<pre></pre>
 </div>
 <div created="20170115162523010" modified="20170115162741851" tags="Contents" title="Planning">
 <pre>&lt;&lt;list-links &quot;[tag[Tasks]]&quot;&gt;&gt;</pre>
