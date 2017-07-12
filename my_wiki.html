@@ -193,6 +193,8 @@ Error message and password prompt
 
 <li>Build single module from kernel tree</li>
 
+<li>Calculate line count in an output</li>
+
 <li>Change font size</li>
 
 <li>Completed</li>
@@ -200,6 +202,8 @@ Error message and password prompt
 <li>Contents</li>
 
 <li>Draft of 'Add new remote and checkout a branch from it.'</li>
+
+<li>Draft of 'Fast kernel module development with QEMU'</li>
 
 <li>Draft of 'Make initrd/initramfs'</li>
 
@@ -7963,7 +7967,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20170624133207676" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20170712083551729" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -8017,7 +8021,7 @@ Error message and password prompt
 <div created="20170528135638216" modified="20170604150150366" title="$:/state/toc/Learning-unsorted-209360082">
 <pre>close</pre>
 </div>
-<div list="[[Build single module from kernel tree]] [[Fast kernel module development with QEMU]] [[Draft of 'Make initrd/initramfs']] [[Draft of 'Add new remote and checkout a branch from it.']] [[Handy log]]" title="$:/StoryList">
+<div list="[[Calculate line count in an output]] [[System management]] [[Draft of 'Fast kernel module development with QEMU']] [[Change font size]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8400,6 +8404,18 @@ $ modprobe i2c-i801
 ```
 </pre>
 </div>
+<div created="20170712081021365" modified="20170712081828948" tags="[[System management]] howto [[shell tips]]" title="Calculate line count in an output">
+<pre>!! To calculate the number of lines in an output use [[wc -l|https://linux.die.net/man/1/wc]] command
+
+The command above will calculate the number of cores in your machine
+
+```
+$ cat /proc/cpuinfo | grep proc | wc -l
+4
+```
+
+</pre>
+</div>
 <div created="20170604150245850" modified="20170604151251780" tags="[[System management]] howto arch" title="Change font size">
 <pre>!! Show all fonts
 
@@ -8479,6 +8495,42 @@ $ git branch
 master
 ```
 </pre>
+</div>
+<div created="20170624130140837" draft.of="Fast kernel module development with QEMU" draft.title="Fast kernel module development with QEMU" modified="20170712081739914" tags="[[Linux kernel development]] [[System management]] howto" title="Draft of 'Fast kernel module development with QEMU'">
+<pre>!!Rebuild your kernel module
+
+```
+make M=drivers/i2c/busses/
+```
+
+!! Add your module to initramfs image
+
+In Arch use [[mkinitcpio|https://wiki.archlinux.org/index.php/Mkinitcpio]] to create custom initramfs image.
+
+Add your module to /etc/mkinitcpio.conf:
+
+```
+MODULES=&quot;my_module&quot;
+```
+Or in other way:
+
+```
+FILES=&quot;/lib/modules/4.12.0-rc4-ARCH+/kernel/my_module.ko&quot;
+```
+
+Make initramfs for kernel 4.12-rc4:
+
+```
+mkinitcpio -c /etc/mkinitcpio.conf -k 4.12.0-rc4 -g /boot/initramfs-4.12.0-rc4.img
+```
+
+For distro independent initramfs creation use [[gen_init_cpio|https://github.com/torvalds/linux/blob/master/usr/gen_init_cpio.c]]
+
+!! Run [[qemu|http://wiki.qemu.org/Main_Page]]
+
+```
+qemu-system-x86_64 -kernel /boot/vmlinuz-4.12.0-rc4-ARCH+ -initrd /home/alem/git/kernels/linux-main/usr/initramfs.img -append 'console=ttyS0' -nographic
+```</pre>
 </div>
 <div created="20170611152609767" draft.of="Make initrd/initramfs" draft.title="Make initrd/initramfs" modified="20170624130253787" tags="arch howto [[System management]]" title="Draft of 'Make initrd/initramfs'">
 <pre>!! Arch linux
