@@ -7967,7 +7967,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20170712083551729" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20170712103248205" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -8021,7 +8021,7 @@ Error message and password prompt
 <div created="20170528135638216" modified="20170604150150366" title="$:/state/toc/Learning-unsorted-209360082">
 <pre>close</pre>
 </div>
-<div list="[[Calculate line count in an output]] [[System management]] [[Draft of 'Fast kernel module development with QEMU']] [[Change font size]]" title="$:/StoryList">
+<div list="[[Update grub2 configuration]] [[Build and run custom kernel]] [[Calculate line count in an output]] [[System management]] [[Draft of 'Fast kernel module development with QEMU']] [[Change font size]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8189,7 +8189,7 @@ master
 <div created="20170115163009035" modified="20170115163155560" tags="English" title="Books">
 <pre>&lt;&lt;list-links &quot;[tag[Books]]&quot;&gt;&gt;</pre>
 </div>
-<div created="20170108140138482" modified="20170521153047911" tags="[[Linux kernel development]] howto" title="Build and run custom kernel">
+<div created="20170108140138482" modified="20170712103230365" tags="[[Linux kernel development]] howto" title="Build and run custom kernel">
 <pre>!!Get kernel sources
 
 Make sure that you have prepared the [[environment|Preparing environment for kernel development]] before building kernel.
@@ -8253,12 +8253,37 @@ Where x is the number of cores. This number can be less or equal then number of 
 cat /proc/cpuinfo
 ```
 
-!!Install the kernel
+!!Install the kernel (common way)
 
 To install new kernel your distribution has to contain special installkernel script. It is usually located in /sbin/installkernel. This script installs the kernel to /boot/, installs modules and updates bootloader config file. Try run:
 
 ```
 sudo make modules_install install
+```
+
+!!Install the kernel in [[ArchLinux|https://wiki.archlinux.org/]]
+ 
+
+!!!Copy kernel and System.map to boot directory.
+
+```
+$ cp -v arch/x86/boot/bzImage /boot/vmlinuz-4.12.0-ARCH+
+$ cp -v System.map /boot/System.map-4.12.0-ARCH+
+
+```
+
+!!!Make [[initial ram disk|https://wiki.archlinux.org/index.php/Kernels/Traditional_compilation#Manual_method]]
+
+```
+$ sudo mkinitcpio -c /etc/mkinitcpio_custom.conf -k 4.12.0-ARCH+ -g /boot/initramfs-4.12.0-ARCH+.img
+
+```
+
+!!!Update grub configuration
+
+```
+$ grub-mkconfig -o /boot/grub/grub.cfg
+
 ```
 
 !!Run the kernel
