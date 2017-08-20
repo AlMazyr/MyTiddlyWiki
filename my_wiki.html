@@ -207,13 +207,13 @@ Error message and password prompt
 
 <li>Draft of 'Add new remote and checkout a branch from it.'</li>
 
-<li>Draft of 'Make initrd/initramfs'</li>
-
 <li>English</li>
 
 <li>Fast kernel module development with QEMU</li>
 
 <li>GIT TIPS</li>
+
+<li>Groups management</li>
 
 <li>Handy log</li>
 
@@ -260,6 +260,8 @@ Error message and password prompt
 <li>Simple misc char device driver</li>
 
 <li>Simple module which will be downloaded when any usb kbd plugged in</li>
+
+<li>Sound management</li>
 
 <li>Starship Troopers</li>
 
@@ -7977,7 +7979,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20170805172904719" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20170820170328810" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -8442,7 +8444,7 @@ $ modprobe i2c-i801
 ```
 </pre>
 </div>
-<div created="20170712081021365" modified="20170712081828948" tags="[[System management]] howto [[shell tips]]" title="Calculate line count in an output">
+<div created="20170712081021365" modified="20170820170302115" tags="[[System management]] howto [[shell tips]]" title="Calculate line count in an output">
 <pre>!! To calculate the number of lines in an output use [[wc -l|https://linux.die.net/man/1/wc]] command
 
 The command above will calculate the number of cores in your machine
@@ -8547,31 +8549,6 @@ master
 ```
 </pre>
 </div>
-<div created="20170611152609767" draft.of="Make initrd/initramfs" draft.title="Make initrd/initramfs" modified="20170624130253787" tags="arch howto [[System management]]" title="Draft of 'Make initrd/initramfs'">
-<pre>!! Arch linux
-
-Arch distribution uses ''initramfs''. 
-
-To make new initramfs for custom kernel use mkinitcpio
-
-```
-$ mkinitcpio -k &lt;kernel version&gt; -g /boot/initramfs-&lt;file-name&gt;.img
-```
-
-You can find kernel version from //''/lib/modules''//
-
-For example, for kernel 4.12
-
-```
-$ mkinitcpio -k 4.12.0 -g /boot/initramfs-4.12.0.img
-```
-To generate initramfs for stock Arch kernel
-
-```
-$ mkinitcpio -p linux
-```
-</pre>
-</div>
 <div created="20170107165932737" modified="20170604150112175" tags="Learning" title="English">
 <pre>&lt;&lt;list-links &quot;[tag[English]]&quot;&gt;&gt;</pre>
 </div>
@@ -8613,6 +8590,26 @@ qemu-system-x86_64 -kernel /boot/vmlinuz-4.12.0-rc4-ARCH+ -initrd /home/alem/git
 </div>
 <div created="20170320055133278" modified="20170508170730671" tags="Learning" title="GIT TIPS">
 <pre>&lt;&lt;list-links &quot;[tag[GIT TIPS]]&quot;&gt;&gt;</pre>
+</div>
+<div created="20170820141800226" modified="20170820170255619" tags="[[System management]] howto" title="Groups management">
+<pre>!! To see all information about groups and users:
+
+```
+&gt; cat /etc/group
+```
+
+!!To see all groups for user:
+
+```
+&gt; groups user
+```
+
+!!To add the user to the named group:
+
+```
+&gt; gpasswd -a user group
+```
+</pre>
 </div>
 <div created="20170514184303931" modified="20170514184654579" tags="[[GIT TIPS]]" title="Handy log">
 <pre>!!Compact form of the commit log message
@@ -8956,7 +8953,7 @@ $ dd bs=4M if=/path/to/your_fancy_image.iso | pv | dd of=/dev/sdx
 !! Ready
 </pre>
 </div>
-<div created="20170611152609767" modified="20170611154621756" tags="arch howto [[System management]]" title="Make initrd/initramfs">
+<div created="20170611152609767" modified="20170820170406522" tags="arch howto [[System management]]" title="Make initrd/initramfs">
 <pre>!! Arch linux
 
 Arch distribution uses ''initramfs''. 
@@ -9448,6 +9445,45 @@ Try to plugg in any usb keyboard and watch your module loading
 
 ```
 lsmod
+```</pre>
+</div>
+<div created="20170820143304098" modified="20170820170630923" tags="[[System management]] arch howto" title="Sound management">
+<pre>!!To raise the volume:
+
+```
+&gt; amixer set Master 5%+
+```
+
+!!To lower the volume:
+
+```
+&gt; amixer set Master 5%-
+```
+
+!!To mute/umute the volume
+
+```
+&gt; amixer set Master toggle
+```
+
+!! To map extra sound keys to sound acpi events try use [[acpid|https://wiki.archlinux.org/index.php/Acpid]]
+
+You can define any action for ACPI event by modifying file `/etc/acpi/handler.sh`
+
+For example, to lover the volume try add this to file:
+
+```
+      button/volumedown)                                                         
+          case &quot;$2&quot; in·                                                          
+              VOLDN)                                                             
+                  logger 'Volume down'                                           
+                  amixer set Master 5%-                                          
+                  ;;                                                             
+              *)                                                                 
+                 logger &quot;ACPI action undefined: $2&quot;                             
+                  ;;                                                             
+          esac                                                                   
+          ;;                                                   
 ```</pre>
 </div>
 <div created="20170115163105226" modified="20170115163133464" tags="Books" title="Starship Troopers">
