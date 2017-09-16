@@ -209,7 +209,9 @@ Error message and password prompt
 
 <li>English</li>
 
-<li>Extract certain field from text file</li>
+<li>Extract certain field from file by cut</li>
+
+<li>Extract fields from file</li>
 
 <li>Fast kernel module development with QEMU</li>
 
@@ -260,6 +262,8 @@ Error message and password prompt
 <li>Print n'th line from file</li>
 
 <li>Qemu gdb stub</li>
+
+<li>Read file line by line</li>
 
 <li>Run your script when new device plugged in</li>
 
@@ -7985,7 +7989,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20170831125827081" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20170916150017107" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -8036,13 +8040,13 @@ Error message and password prompt
 <div created="20170108093422642" modified="20170320055125601" title="$:/state/toc/Learning-Tiddly features-209360082">
 <pre>close</pre>
 </div>
-<div created="20170528135638216" modified="20170604150150366" title="$:/state/toc/Learning-unsorted-209360082">
-<pre>close</pre>
+<div created="20170528135638216" modified="20170916145830555" title="$:/state/toc/Learning-unsorted-209360082">
+<pre>open</pre>
 </div>
 <div created="20170805170408374" modified="20170831122649497" title="$:/state/toc/Linux kernel development-Kernel debugging-209360082">
 <pre>close</pre>
 </div>
-<div list="Filters [[Extract certain field from text file]] [[Print n'th line from file]]" title="$:/StoryList">
+<div list="[[Make BIOS and UEFI bootable usb using dd]] unsorted" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8558,7 +8562,7 @@ master
 <div created="20170107165932737" modified="20170604150112175" tags="Learning" title="English">
 <pre>&lt;&lt;list-links &quot;[tag[English]]&quot;&gt;&gt;</pre>
 </div>
-<div created="20170831122707420" modified="20170831123857810" tags="[[System management]] [[shell tips]] howto cut" title="Extract certain field from text file">
+<div created="20170831122707420" modified="20170916145748004" tags="[[System management]] [[shell tips]] howto cut" title="Extract certain field from file by cut">
 <pre>!!To extract certain fields from file use [[cut|https://linux.die.net/man/1/cut]]:
 
 ```
@@ -8573,6 +8577,40 @@ http:33:/usr/bin/nologin
 ```
 
 In the example above we can see only 3 fields from file `/etc/passwd`. These fields are login name, user ID and user command interpreter. </pre>
+</div>
+<div created="20170916125104906" modified="20170916133610197" tags="[[System management]] howto [[Usefull tools howtos]] grep sed cut" title="Extract fields from file">
+<pre>!!1. [[grep|https://linux.die.net/man/1/grep]]
+
+```
+&gt; cat /etc/passwd | grep -Po '[a-z_-]+:x:\K\d+:\d+(?=:.*:.+)'
+0:0
+1:1
+2:2
+...
+```
+This is the most hard way. 
+
+!!2. [[sed|https://linux.die.net/man/1/sed]]
+```
+&gt; cat /etc/passwd | sed -rn 's/[a-z_-]+:x:([0-9]+):([0-9]+):
+0:0
+1:1
+2:2
+...
+```
+
+
+!!3. [[cut|https://linux.die.net/man/1/cut]]
+
+```
+&gt; cut -d : -f 3,4 /etc/passwd
+0:0
+1:1
+2:2
+...
+```
+
+In the examples above different tools were used for extracting 2 fields (user and group id) from /etc/passwd</pre>
 </div>
 <div created="20170624130140837" modified="20170805170649318" tags="[[Linux kernel development]] [[System management]] howto qemu" title="Fast kernel module development with QEMU">
 <pre>!!Rebuild your kernel module
@@ -8998,7 +9036,7 @@ Connect to target from gdb:
 <div created="20170108101817156" modified="20170108135118426" tags="Learning" title="Linux kernel development">
 <pre>&lt;&lt;list-links &quot;[tag[Linux kernel development]]&quot;&gt;&gt;</pre>
 </div>
-<div created="20170527145259405" modified="20170528135636385" tags="howto unsorted" title="Make BIOS and UEFI bootable usb using dd">
+<div created="20170527145259405" modified="20170916150014475" tags="howto dd iso [[shell tips]] [[System management]]" title="Make BIOS and UEFI bootable usb using dd">
 <pre>!!Copy iso image to usb disk
 
 ```
@@ -9431,6 +9469,25 @@ qemu-system-x86_64 -s -enable-kvm -kernel /boot/vmlinuz -initrd /boot/initramfs.
 ```
 
 </pre>
+</div>
+<div created="20170916135517005" modified="20170916140319059" tags="[[System management]] howto bash" title="Read file line by line">
+<pre>!! To read file in bash:
+
+```
+#!/bin/bash
+
+while read -r line
+do
+    name=&quot;$line&quot;
+    echo &quot;Line read from file - $name&quot;
+done &lt; &quot;$1&quot;
+```
+
+!!Run the script as follows:
+
+```
+&gt; read_file.sh filename.txt
+```</pre>
 </div>
 <div created="20170205181612133" modified="20170225153535729" tags="[[Linux kernel development]] howto" title="Run your script when new device plugged in">
 <pre>!!Usefull links:
