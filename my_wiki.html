@@ -175,6 +175,8 @@ Error message and password prompt
 
 <li>$:/state/toc/Linux kernel development-Kernel debugging-209360082</li>
 
+<li>$:/state/toc/System management-Bash-209360082</li>
+
 <li>$:/StoryList</li>
 
 <li>$:/temp/info-plugin</li>
@@ -187,6 +189,8 @@ Error message and password prompt
 
 <li>Add new remote and checkout a branch from it.</li>
 
+<li>Bash</li>
+
 <li>Books</li>
 
 <li>Build and run custom kernel</li>
@@ -198,6 +202,10 @@ Error message and password prompt
 <li>Calculate line count in an output</li>
 
 <li>Change console font size</li>
+
+<li>Change local commit</li>
+
+<li>Command substitution</li>
 
 <li>Completed</li>
 
@@ -7989,7 +7997,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20170916150017107" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20170924132253015" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -8043,10 +8051,13 @@ Error message and password prompt
 <div created="20170528135638216" modified="20170916145830555" title="$:/state/toc/Learning-unsorted-209360082">
 <pre>open</pre>
 </div>
-<div created="20170805170408374" modified="20170831122649497" title="$:/state/toc/Linux kernel development-Kernel debugging-209360082">
+<div created="20170805170408374" modified="20170924125827950" title="$:/state/toc/Linux kernel development-Kernel debugging-209360082">
 <pre>close</pre>
 </div>
-<div list="[[Make BIOS and UEFI bootable usb using dd]] unsorted" title="$:/StoryList">
+<div created="20170924130342574" modified="20170924130401710" title="$:/state/toc/System management-Bash-209360082">
+<pre>close</pre>
+</div>
+<div list="[[Change local commit]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8210,6 +8221,9 @@ $ git branch
 master
 ```
 </pre>
+</div>
+<div created="20170918055126896" modified="20170918055242447" tags="[[System management]]" title="Bash">
+<pre>&lt;&lt;list-links &quot;[tag[Bash]]&quot;&gt;&gt;</pre>
 </div>
 <div created="20170115163009035" modified="20170115163155560" tags="English" title="Books">
 <pre>&lt;&lt;list-links &quot;[tag[Books]]&quot;&gt;&gt;</pre>
@@ -8494,6 +8508,38 @@ $ man 5 vconsole.conf
 ```
 </pre>
 </div>
+<div created="20170924130432402" modified="20170924132222761" tags="[[GIT TIPS]] howto" title="Change local commit">
+<pre>!!Modify local commit message
+
+```
+&gt; git commit -m &quot;Initial commit&quot;
+&gt; git commit --amend
+```
+
+!!Add a file to commit
+
+```
+&gt; git commit -m &quot;initial commit&quot;
+&gt; git add forgotten_file
+&gt; git commit --amend
+```</pre>
+</div>
+<div created="20170918055318819" modified="20170918060157797" tags="Bash [[shell tips]]" title="Command substitution">
+<pre>Command substitution allows us to take output of the command or program and save it to the variable.
+
+See the example below.
+
+```
+&gt; VAR=$( ls )
+&gt; echo $VAR
+bin
+books
+Desktop
+Downloads
+git
+media
+```</pre>
+</div>
 <div created="20170108081234328" modified="20170115162720595" tags="Tasks" title="Completed">
 <pre>&lt;$list filter=&quot;[!has[draft.of]tag[task]tag[done]sort[created]]&quot;&gt;
 
@@ -8510,15 +8556,15 @@ $ man 5 vconsole.conf
 &lt;&lt;toc-selective-expandable 'Contents' sort[title]&gt;&gt;
 &lt;/div&gt;</pre>
 </div>
-<div created="20170723133121349" modified="20170723133609397" tags="[[GIT TIPS]] howto" title="Delete unpushed git commits">
+<div created="20170723133121349" modified="20170924132246366" tags="[[GIT TIPS]] howto" title="Delete unpushed git commits">
 <pre>!!Delete the most resent commit keeping the work
  ```
-$git reset --soft HEAD~1
+&gt; git reset --soft HEAD~1
 ```
 
 !!Delete the most resent commit destroying the work
 ```
-$git reset --hard HEAD~1
+&gt; git reset --hard HEAD~1
 ```
 
 </pre>
@@ -9619,7 +9665,7 @@ For example, to lover the volume try add this to file:
 <div created="20170115163105226" modified="20170115163133464" tags="Books" title="Starship Troopers">
 <pre></pre>
 </div>
-<div created="20170604150033084" modified="20170604150135184" tags="Learning" title="System management">
+<div created="20170604150033084" modified="20170918055150363" tags="Learning" title="System management">
 <pre>&lt;&lt;list-links &quot;[tag[System management]]&quot;&gt;&gt;</pre>
 </div>
 <div created="20170107163619427" modified="20170115162550588" tags="Contents" title="Tasks">
