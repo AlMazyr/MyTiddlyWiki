@@ -197,6 +197,10 @@ Error message and password prompt
 
 <li>Build and run Debian/Ubuntu kernel</li>
 
+<li>Build and run u-boot on Rpi3</li>
+
+<li>Build cross gcc for ARM</li>
+
 <li>Build single module from kernel tree</li>
 
 <li>Calculate line count in an output</li>
@@ -212,8 +216,6 @@ Error message and password prompt
 <li>Contents</li>
 
 <li>Delete unpushed git commits</li>
-
-<li>Draft of 'Add new remote and checkout a branch from it.'</li>
 
 <li>English</li>
 
@@ -270,6 +272,8 @@ Error message and password prompt
 <li>Print n'th line from file</li>
 
 <li>Qemu gdb stub</li>
+
+<li>Raspberry Pi</li>
 
 <li>Read file line by line</li>
 
@@ -7997,7 +8001,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20170930134805133" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20171108170817143" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -8030,34 +8034,34 @@ Error message and password prompt
 <div created="20170107170148528" modified="20170320054927155" title="$:/state/toc/Learning-English-209360082">
 <pre>close</pre>
 </div>
-<div created="20170508170632807" modified="20170612164634322" title="$:/state/toc/Learning-GIT TIPS-209360082">
-<pre>open</pre>
+<div created="20170508170632807" modified="20171108082916581" title="$:/state/toc/Learning-GIT TIPS-209360082">
+<pre>close</pre>
 </div>
 <div created="20170327060502244" modified="20170327060502244" title="$:/state/toc/Learning-GIT-209360082">
 <pre>open</pre>
 </div>
-<div created="20170109141759614" modified="20170612164459208" title="$:/state/toc/Learning-Linux kernel development-209360082">
+<div created="20170109141759614" modified="20171108084247095" title="$:/state/toc/Learning-Linux kernel development-209360082">
 <pre>open</pre>
 </div>
-<div created="20170604150217022" modified="20170604150217022" title="$:/state/toc/Learning-System management-209360082">
-<pre>open</pre>
+<div created="20170604150217022" modified="20171108082741894" title="$:/state/toc/Learning-System management-209360082">
+<pre>close</pre>
 </div>
 <div created="20170108093516505" modified="20170108093516505" title="$:/state/toc/Learning-Tiddly features-1637712383">
 <pre>open</pre>
 </div>
-<div created="20170108093422642" modified="20170320055125601" title="$:/state/toc/Learning-Tiddly features-209360082">
+<div created="20170108093422642" modified="20171108082745301" title="$:/state/toc/Learning-Tiddly features-209360082">
 <pre>close</pre>
 </div>
-<div created="20170528135638216" modified="20170916145830555" title="$:/state/toc/Learning-unsorted-209360082">
-<pre>open</pre>
+<div created="20170528135638216" modified="20171108084323622" title="$:/state/toc/Learning-unsorted-209360082">
+<pre>close</pre>
 </div>
 <div created="20170805170408374" modified="20170924125827950" title="$:/state/toc/Linux kernel development-Kernel debugging-209360082">
 <pre>close</pre>
 </div>
-<div created="20170924130342574" modified="20170924130401710" title="$:/state/toc/System management-Bash-209360082">
+<div created="20170924130342574" modified="20171108082736206" title="$:/state/toc/System management-Bash-209360082">
 <pre>close</pre>
 </div>
-<div list="[[Extract fields from file]] [[Extract certain field from file by cut]] [[Read file line by line]]" title="$:/StoryList">
+<div list="[[Build and run u-boot on Rpi3]] [[Raspberry Pi]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8186,7 +8190,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20170508164734500" modified="20170513163756735" tags="[[GIT TIPS]]" title="Add new remote and checkout a branch from it.">
+<div created="20170508164734500" modified="20171108082802176" tags="[[GIT TIPS]]" title="Add new remote and checkout a branch from it.">
 <pre>!! Usefull links:
 
 [[Working with remotes|https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes]]
@@ -8431,6 +8435,75 @@ $ sudo make modules_install install
 To run new kernel just reboot your machine.
 </pre>
 </div>
+<div created="20171108082953001" modified="20171108100750544" tags="[[Raspberry Pi]] u-boot rpi3 howto" title="Build and run u-boot on Rpi3">
+<pre>!!Get the source
+Get [[mainline u-boot|http://git.denx.de/u-boot.git/]]:
+
+```
+git clone git://git.denx.de/u-boot.git
+```
+
+Or get special [[Rpi branch|https://github.com/swarren/u-boot]]:
+
+```
+git clone git://github.com/swarren/u-boot.git
+git checkout -b rpi_dev origin/rpi_dev
+```
+
+!!Get an ARM compiler
+Build [[ARM gcc|https://ftp.gnu.org/gnu/gcc/]] from sources. Or just install it. To install it on Ubuntu:
+
+```
+apt-get install gcc-aarch64-linux-gnu
+```
+
+Before compile u-boot run first:
+
+```
+export CROSS_COMPILE=aarch64-linux-gnu-
+```
+
+!!Compile
+
+To configure the source tree for Raspberry Pi 3 run:
+
+```
+make rpi_3_defconfig
+```
+To build:
+
+```
+make -j8
+```
+
+!!Copy U-Boot to your SD card
+
+```
+mount /dev/sdb1 /mnt/tmp
+cp u-boot.bin /mnt/tmp/kernel.img
+```
+!!Prepare U-Boot script file
+Put all the necessary commands into the file `boot.scr`
+
+```
+vim boot.scr
+```
+Create `boot.scr.uimg` from `boot.scr`: 
+
+```
+./tools/mkimage -A arm -O linux -T script -C none -n boot.scr -d boot.scr boot.scr.uimg
+```
+
+Copy `boot.scr.uimg` to your SD card:
+
+```
+cp u-boot.bin /mnt/tmp/
+umount /mnt/tmp
+```</pre>
+</div>
+<div created="20171108084257031" modified="20171108090247847" tags="unsorted" title="Build cross gcc for ARM">
+<pre></pre>
+</div>
 <div created="20170522055632138" modified="20170522060733457" tags="howto [[Linux kernel development]]" title="Build single module from kernel tree">
 <pre>!! Build module
 
@@ -8569,42 +8642,6 @@ media
 
 </pre>
 </div>
-<div created="20170508164734500" draft.of="Add new remote and checkout a branch from it." draft.title="Add new remote and checkout a branch from it." modified="20170624131020625" tags="[[GIT TIPS]]" title="Draft of 'Add new remote and checkout a branch from it.'">
-<pre>!! Usefull links:
-
-[[Working with remotes|https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes]]
-
-[[Branches|https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging]]
-
-!! Add and fetch new remote
-
-```
-$ git remote
-origin
-$ git remote add my-wiki https://github.com/AlMazyr/MyTiddlyWiki
-$ git remote
-origin
-my-wiki
-$ git fetch my-wiki
-```
-
-!!Checkout new branch from remote
-
-```
-$ git branch
-* master
-$ git branch -r
-origin/HEAD -&gt; origin/master
-origin/master
-my-wiki/master
-$ git branch my-wiki-master my-wiki/master
-$ git checkout my-wiki-master
-$ git branch
-* my-wiki-master
-master
-```
-</pre>
-</div>
 <div created="20170107165932737" modified="20170604150112175" tags="Learning" title="English">
 <pre>&lt;&lt;list-links &quot;[tag[English]]&quot;&gt;&gt;</pre>
 </div>
@@ -8735,7 +8772,7 @@ Print data from file in reverse order.
 
 </pre>
 </div>
-<div created="20170320055133278" modified="20170508170730671" tags="Learning" title="GIT TIPS">
+<div created="20170320055133278" modified="20171108082848974" tags="Learning" title="GIT TIPS">
 <pre>&lt;&lt;list-links &quot;[tag[GIT TIPS]]&quot;&gt;&gt;</pre>
 </div>
 <div created="20170820141800226" modified="20170820170255619" tags="[[System management]] howto" title="Groups management">
@@ -9335,7 +9372,7 @@ git send-email --to alem0203@yandex.ru --chain-reply-to ./patches/*.patch
 git send-email --to alem0203@yandex.ru --in-reply-to='some_mail_id' ./patches/*.patch
 ```</pre>
 </div>
-<div created="20170513155935974" modified="20170513163746194" tags="[[Linux kernel development]]" title="Prepare and send kernel patch">
+<div created="20170513155935974" modified="20171108090125648" tags="[[Linux kernel development]]" title="Prepare and send kernel patch">
 <pre>!!Usefull links
 
 [[First patch HOWTO from kernelnewbies|https://kernelnewbies.org/FirstKernelPatch#head-e9907c3b20ae2fc3e0b82d0eec3292d8c13dd7ef]]
@@ -9515,6 +9552,9 @@ qemu-system-x86_64 -s -enable-kvm -kernel /boot/vmlinuz -initrd /boot/initramfs.
 ```
 
 </pre>
+</div>
+<div created="20171108082807962" modified="20171108082908477" tags="Learning" title="Raspberry Pi">
+<pre>&lt;&lt;list-links &quot;[tag[Raspberry Pi]]&quot;&gt;&gt;</pre>
 </div>
 <div created="20170916135517005" modified="20170916140319059" tags="[[System management]] howto bash" title="Read file line by line">
 <pre>!! To read file in bash:
