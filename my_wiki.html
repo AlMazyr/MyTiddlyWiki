@@ -213,7 +213,9 @@ Error message and password prompt
 
 <li>Build and run u-boot on Rpi3</li>
 
-<li>Build binutils, gcc and gdb for arm64</li>
+<li>Build freestanding cross-gcc and cross-gdb for arm64</li>
+
+<li>Build Linux kernel with real time patch(CONFIG_PREEMPT_RT)</li>
 
 <li>Build single module from kernel tree</li>
 
@@ -222,6 +224,8 @@ Error message and password prompt
 <li>Change console font size</li>
 
 <li>Change local commit</li>
+
+<li>Checkout tag to local branch</li>
 
 <li>Command substitution</li>
 
@@ -8017,7 +8021,7 @@ Error message and password prompt
 <div created="20170108090041841" modified="20170108094501579" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20170108102148074" modified="20171124152244202" title="$:/state/sidebar">
+<div created="20170108102148074" modified="20171129153232093" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20170107164845913" modified="20170107164845913" title="$:/state/tab-1749438307">
@@ -8041,8 +8045,8 @@ Error message and password prompt
 <div created="20170107170001671" modified="20171124101218377" title="$:/state/toc/Contents-Learning-209360082">
 <pre>close</pre>
 </div>
-<div created="20171123140739220" modified="20171124101220513" title="$:/state/toc/Contents-Linux kernel development-209360082">
-<pre>close</pre>
+<div created="20171123140739220" modified="20171129153107711" title="$:/state/toc/Contents-Linux kernel development-209360082">
+<pre>open</pre>
 </div>
 <div created="20171123120030620" modified="20171123120030620" title="$:/state/toc/Contents-Raspberry Pi-209360082">
 <pre>open</pre>
@@ -8095,7 +8099,7 @@ Error message and password prompt
 <div created="20170924130342574" modified="20171124101232281" title="$:/state/toc/System management-Bash-209360082">
 <pre>close</pre>
 </div>
-<div list="[[Xenomai on Raspberry Pi 3 for arm64]]" title="$:/StoryList">
+<div list="" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8112,7 +8116,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20170108093501279" modified="20170115162426540" title="$:/temp/search">
+<div created="20170108093501279" modified="20171129153105008" title="$:/temp/search">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.13">
@@ -8538,7 +8542,7 @@ cp u-boot.bin /mnt/tmp/
 umount /mnt/tmp
 ```</pre>
 </div>
-<div created="20171108084257031" modified="20171124094228090" tags="ARM gcc arm64 gdb" title="Build binutils, gcc and gdb for arm64">
+<div created="20171108084257031" modified="20171127094801401" tags="ARM gcc arm64 gdb" title="Build freestanding cross-gcc and cross-gdb for arm64">
 <pre>!Build and install Binutils
 
 !!Download the latest binuils from https://ftp.gnu.org/gnu/binutils/
@@ -8624,6 +8628,36 @@ make -j9
 sudo make install
 ```
 </pre>
+</div>
+<div created="20171128113803298" modified="20171128124710501" tags="[[Linux kernel development]] preempt_rt" title="Build Linux kernel with real time patch(CONFIG_PREEMPT_RT)">
+<pre>!!Get kernel sources
+```
+&gt; wget https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.1.tar.gz
+&gt; tar xvf linux-4.14.1.tar.gz
+```
+
+!!Get patch for this kernel
+```
+&gt; wget https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/patch-4.14.1-rt3.patch.xz
+&gt; xzcat patch-4.14.1-rt3.patch.xz &gt; patch-4.14.1-rt3.patch
+```
+
+!!Apply patch
+```
+patch -p1 &lt; patch-4.14.1-rt3.patch
+```
+
+!!Config kernel
+
+Set ''CONFIG_PREEMPT_RT_FULL'' option to unlock full real time capabilities.
+
+```
+make menuconfig
+```
+!!Build kernel
+```
+make zImage modules
+```</pre>
 </div>
 <div created="20170522055632138" modified="20170522060733457" tags="howto [[Linux kernel development]]" title="Build single module from kernel tree">
 <pre>!! Build module
@@ -8716,6 +8750,20 @@ $ man 5 vconsole.conf
 &gt; git commit -m &quot;initial commit&quot;
 &gt; git add forgotten_file
 &gt; git commit --amend
+```</pre>
+</div>
+<div created="20171129153139887" modified="20171129153224630" tags="[[GIT TIPS]]" title="Checkout tag to local branch">
+<pre>!!First fetch all the tags to your local repository
+
+```
+git fetch --all --tags --prune
+
+```
+
+!!Then checkout tag to your local branch
+
+```
+git checkout tags/&lt;tag_name&gt; -b &lt;branch_name&gt;
 ```</pre>
 </div>
 <div created="20170918055318819" modified="20170918060157797" tags="Bash [[shell tips]]" title="Command substitution">
