@@ -142,6 +142,8 @@ Error message and password prompt
 
 <li>$:/state/toc/Contents-ARM-209360082</li>
 
+<li>$:/state/toc/Contents-Containers-209360082</li>
+
 <li>$:/state/toc/Contents-GIT TIPS-209360082</li>
 
 <li>$:/state/toc/Contents-Gnuplot-209360082</li>
@@ -152,7 +154,11 @@ Error message and password prompt
 
 <li>$:/state/toc/Contents-Raspberry Pi-209360082</li>
 
+<li>$:/state/toc/Contents-System management-209360082</li>
+
 <li>$:/state/toc/Contents-Usefull tools howtos-209360082</li>
+
+<li>$:/state/toc/Contents/Containers-LXC-209360082</li>
 
 <li>$:/StoryList</li>
 
@@ -187,6 +193,8 @@ Error message and password prompt
 <li>Change console font size</li>
 
 <li>Change local commit</li>
+
+<li>Check file system type</li>
 
 <li>Checkout tag to local branch</li>
 
@@ -8615,11 +8623,14 @@ Error message and password prompt
 <div created="20180123091314359" modified="20180123091314359" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180123091304151" modified="20180314140337457" title="$:/state/sidebar">
+<div created="20180123091304151" modified="20180319075007539" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180123091047856" modified="20180314132445155" title="$:/state/toc/Contents-ARM-209360082">
 <pre>close</pre>
+</div>
+<div created="20180319072203152" modified="20180319072203152" title="$:/state/toc/Contents-Containers-209360082">
+<pre>open</pre>
 </div>
 <div created="20180123091103739" modified="20180314132445915" title="$:/state/toc/Contents-GIT TIPS-209360082">
 <pre>close</pre>
@@ -8636,10 +8647,16 @@ Error message and password prompt
 <div created="20180123091100059" modified="20180123091101019" title="$:/state/toc/Contents-Raspberry Pi-209360082">
 <pre>close</pre>
 </div>
+<div created="20180319074726662" modified="20180319074726662" title="$:/state/toc/Contents-System management-209360082">
+<pre>open</pre>
+</div>
 <div created="20180123091111115" modified="20180123091111939" title="$:/state/toc/Contents-Usefull tools howtos-209360082">
 <pre>close</pre>
 </div>
-<div list="Setup LXC Containers" title="$:/StoryList">
+<div created="20180319072204999" modified="20180319072204999" title="$:/state/toc/Contents/Containers-LXC-209360082">
+<pre>open</pre>
+</div>
+<div list="[[Check file system type]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9320,6 +9337,15 @@ $ man 5 vconsole.conf
 &gt; git add forgotten_file
 &gt; git commit --amend
 ```</pre>
+</div>
+<div created="20180319074730418" modified="20180319075022340" tags="lsblk [[System management]]" title="Check file system type">
+<pre>!!Using `lsblk`
+
+```
+lsblk -l
+```
+
+</pre>
 </div>
 <div created="20171129153139887" modified="20171129153224630" tags="[[GIT TIPS]]" title="Checkout tag to local branch">
 <pre>!!First fetch all the tags to your local repository
