@@ -248,6 +248,8 @@ Error message and password prompt
 
 <li>Markup fetures</li>
 
+<li>Mounting raw disk image</li>
+
 <li>mutt</li>
 
 <li>Patch versioning</li>
@@ -8702,7 +8704,7 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20180422094646708" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20180425065310134" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180421170729288" modified="20180421170729288" title="$:/state/toc/Contents-Qemu-209360082">
@@ -8711,7 +8713,7 @@ Error message and password prompt
 <div created="20180421170723848" modified="20180421170723848" title="$:/state/toc/Contents-System management-209360082">
 <pre>open</pre>
 </div>
-<div list="[[Connect to qmp server via telnet]] [[Connection to Monitor]]" title="$:/StoryList">
+<div list="[[Mounting raw disk image]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8727,7 +8729,7 @@ Error message and password prompt
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
-            &quot;text&quot;: &quot;file:///home/alem/git/MyTiddlyWiki/my_wiki.html&quot;
+            &quot;text&quot;: &quot;file:///home/alex_mazyrin/git/wiki2/my_wiki.html&quot;
         },
         &quot;$:/info/url/host&quot;: {
             &quot;title&quot;: &quot;$:/info/url/host&quot;,
@@ -8747,7 +8749,7 @@ Error message and password prompt
         },
         &quot;$:/info/url/pathname&quot;: {
             &quot;title&quot;: &quot;$:/info/url/pathname&quot;,
-            &quot;text&quot;: &quot;/home/alem/git/MyTiddlyWiki/my_wiki.html&quot;
+            &quot;text&quot;: &quot;/home/alex_mazyrin/git/wiki2/my_wiki.html&quot;
         },
         &quot;$:/info/url/search&quot;: {
             &quot;title&quot;: &quot;$:/info/url/search&quot;,
@@ -10167,6 +10169,40 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 ```
+</pre>
+</div>
+<div created="20180425064717736" modified="20180425065305279" tags="[[System management]] mount kpartx" title="Mounting raw disk image">
+<pre>!!Mount all the partitions using [[kpartx|https://linux.die.net/man/8/kpartx]]
+
+To get partitions list from image run:
+
+```
+&gt; sudo kpartx -l image.raw
+loop0p1 : 0 1048576 /dev/loop0 2048
+loop0p2 : 0 12025856 /dev/loop0 1050624
+loop0p3 : 0 7892992 /dev/loop0 13076480
+```
+To mount all the partitions:
+
+```
+&gt; sudo kpartx -av image.raw
+add map loop0p1 (252:0): 0 1048576 linear 7:0 2048
+add map loop0p2 (252:1): 0 12025856 linear 7:0 1050624
+add map loop0p3 (252:2): 0 7892992 linear 7:0 13076480
+```
+
+!!Mount one partition using [[mount|https://linux.die.net/man/8/mount]]
+
+```
+&gt; sudo mount /dev/mapper/loop0p2 ~/media
+```
+!!Umount partiotions after finishing
+
+```
+sudo umount ~/media
+sudo kpartx -vd  image.raw
+```
+
 </pre>
 </div>
 <div created="20170212090949642" modified="20170212124448395" tags="[[Usefull tools howtos]]" title="mutt">
