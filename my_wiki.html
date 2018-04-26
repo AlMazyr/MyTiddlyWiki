@@ -158,6 +158,8 @@ Error message and password prompt
 
 <li>$:/temp/info-plugin</li>
 
+<li>$:/temp/search</li>
+
 <li>$:/themes/tiddlywiki/snowwhite</li>
 
 <li>$:/themes/tiddlywiki/vanilla</li>
@@ -8722,7 +8724,7 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20180426125113105" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20180426131611936" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180426123159916" modified="20180426123159916" title="$:/state/toc/Contents-ARM-209360082">
@@ -8743,10 +8745,10 @@ Error message and password prompt
 <div created="20180421170729288" modified="20180426121251374" title="$:/state/toc/Contents-Qemu-209360082">
 <pre>open</pre>
 </div>
-<div created="20180421170723848" modified="20180426091046652" title="$:/state/toc/Contents-System management-209360082">
-<pre>close</pre>
+<div created="20180421170723848" modified="20180426125413717" title="$:/state/toc/Contents-System management-209360082">
+<pre>open</pre>
 </div>
-<div list="[[Install kernel and modules to specific folder]] [[Build and run custom kernel]]" title="$:/StoryList">
+<div list="[[Update grub2 configuration]] [[Make initrd/initramfs]] [[Install kernel and modules to specific folder]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8794,6 +8796,9 @@ Error message and password prompt
         }
     }
 }</pre>
+</div>
+<div created="20180426130539059" modified="20180426131000955" title="$:/temp/search">
+<pre>init</pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.15">
 <pre>{
@@ -10107,7 +10112,7 @@ $ dd bs=4M if=/path/to/your_fancy_image.iso | pv | dd of=/dev/sdx
 !! Ready
 </pre>
 </div>
-<div created="20170611152609767" modified="20170820170406522" tags="arch howto [[System management]]" title="Make initrd/initramfs">
+<div created="20170611152609767" modified="20180426131609473" tags="arch howto [[System management]]" title="Make initrd/initramfs">
 <pre>!! Arch linux
 
 Arch distribution uses ''initramfs''. 
@@ -10115,7 +10120,7 @@ Arch distribution uses ''initramfs''.
 To make new initramfs for custom kernel use mkinitcpio
 
 ```
-$ mkinitcpio -k &lt;kernel version&gt; -g /boot/initramfs-&lt;file-name&gt;.img
+&gt; mkinitcpio -k &lt;kernel version&gt; -g /boot/initramfs-&lt;file-name&gt;.img
 ```
 
 You can find kernel version from //''/lib/modules''//
@@ -10123,12 +10128,20 @@ You can find kernel version from //''/lib/modules''//
 For example, for kernel 4.12
 
 ```
-$ mkinitcpio -k 4.12.0 -g /boot/initramfs-4.12.0.img
+&gt; mkinitcpio -k 4.12.0 -g /boot/initramfs-4.12.0.img
 ```
 To generate initramfs for stock Arch kernel
 
 ```
-$ mkinitcpio -p linux
+&gt; mkinitcpio -p linux
+```
+
+!!Ubuntu
+
+To generate initramfs for kernel ''4.4.0+'' 
+
+```
+&gt; sudo mkinitramfs -o /boot/initrd.img-4.4.0+ 4.4.0+
 ```
 </pre>
 </div>
