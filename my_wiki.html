@@ -140,6 +140,12 @@ Error message and password prompt
 
 <li>$:/state/sidebar</li>
 
+<li>$:/state/toc/Contents-ARM-209360082</li>
+
+<li>$:/state/toc/Contents-C++-209360082</li>
+
+<li>$:/state/toc/Contents-Containers-209360082</li>
+
 <li>$:/state/toc/Contents-Linux API-209360082</li>
 
 <li>$:/state/toc/Contents-Linux kernel development-209360082</li>
@@ -229,6 +235,8 @@ Error message and password prompt
 <li>Hello world</li>
 
 <li>House of cards</li>
+
+<li>Install kernel and modules to specific folder</li>
 
 <li>Journal</li>
 
@@ -8714,14 +8722,23 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20180426122132739" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20180426125113105" title="$:/state/sidebar">
 <pre>yes</pre>
+</div>
+<div created="20180426123159916" modified="20180426123159916" title="$:/state/toc/Contents-ARM-209360082">
+<pre>open</pre>
+</div>
+<div created="20180426123201740" modified="20180426123201740" title="$:/state/toc/Contents-C++-209360082">
+<pre>open</pre>
+</div>
+<div created="20180426123202724" modified="20180426123202724" title="$:/state/toc/Contents-Containers-209360082">
+<pre>open</pre>
 </div>
 <div created="20180426091120972" modified="20180426091123364" title="$:/state/toc/Contents-Linux API-209360082">
 <pre>close</pre>
 </div>
-<div created="20180426091131300" modified="20180426091132523" title="$:/state/toc/Contents-Linux kernel development-209360082">
-<pre>close</pre>
+<div created="20180426091131300" modified="20180426123128885" title="$:/state/toc/Contents-Linux kernel development-209360082">
+<pre>open</pre>
 </div>
 <div created="20180421170729288" modified="20180426121251374" title="$:/state/toc/Contents-Qemu-209360082">
 <pre>open</pre>
@@ -8729,7 +8746,7 @@ Error message and password prompt
 <div created="20180421170723848" modified="20180426091046652" title="$:/state/toc/Contents-System management-209360082">
 <pre>close</pre>
 </div>
-<div list="[[Mounting qcow2 disk image on Linux]] [[Check devices]] [[Linux input subsystem]]" title="$:/StoryList">
+<div list="[[Install kernel and modules to specific folder]] [[Build and run custom kernel]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9965,6 +9982,23 @@ You can see log messages from your module in `/val/log/syslog`</pre>
 ''tipsy'' - подвыпивший
 
 ''discard'' - выбрасывать</pre>
+</div>
+<div created="20180426124215377" modified="20180426125110826" tags="[[Linux kernel development]] kernel" title="Install kernel and modules to specific folder">
+<pre>!!Install kernel by hands
+
+To copy kernel to ''~/mount'' folder:
+
+```
+&gt; cp arch/arm/boot/zImage ~/mount/vmlinuz.img
+```
+
+!!Install kernel modules
+
+```
+make INSTALL_MOD_PATH=~/mount modules_install
+```
+
+</pre>
 </div>
 <div created="20170107171153456" modified="20170107171153456" tags="Contents" title="Journal">
 <pre></pre>
