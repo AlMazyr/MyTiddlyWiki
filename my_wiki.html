@@ -320,6 +320,8 @@ Error message and password prompt
 
 <li>Read file line by line</li>
 
+<li>Read logs by tag</li>
+
 <li>Run your script when new device plugged in</li>
 
 <li>Setup</li>
@@ -8668,7 +8670,7 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20180511092759400" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20180511114738075" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180501080503677" modified="20180501080557877" title="$:/state/tab-1749438307">
@@ -8707,7 +8709,7 @@ Error message and password prompt
 <div created="20180427071406489" modified="20180427071406489" title="$:/state/toc/Contents/System management-Initrd/initramfs-209360082">
 <pre>open</pre>
 </div>
-<div list="[[Install apk with adb]]" title="$:/StoryList">
+<div list="[[Read logs by tag]] [[Install apk with adb]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -10719,6 +10721,19 @@ done &lt; &quot;$1&quot;
 
 ```
 &gt; read_file.sh filename.txt
+```</pre>
+</div>
+<div created="20180511114419077" modified="20180511114736668" tags="adb Android logcat" title="Read logs by tag">
+<pre>!!To get all log strings with tag myTag:
+
+```
+&gt; logcat myTag:* *:S
+```
+
+!!With adb:
+
+```
+&gt; adb logcat &quot;myTag:*&quot; &quot;*:S&quot;
 ```</pre>
 </div>
 <div created="20170205181612133" modified="20170225153535729" tags="[[Linux kernel development]] howto" title="Run your script when new device plugged in">
