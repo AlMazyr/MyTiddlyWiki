@@ -126,6 +126,8 @@ Error message and password prompt
 
 <li>$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/new-journal</li>
 
+<li>$:/config/RelinkOnRename</li>
+
 <li>$:/core</li>
 
 <li>$:/DefaultTiddlers</li>
@@ -151,6 +153,8 @@ Error message and password prompt
 <li>$:/state/toc/Contents-C++-209360082</li>
 
 <li>$:/state/toc/Contents-Containers-209360082</li>
+
+<li>$:/state/toc/Contents-GIT TIPS-209360082</li>
 
 <li>$:/state/toc/Contents-Linux API-209360082</li>
 
@@ -213,6 +217,8 @@ Error message and password prompt
 <li>Check file system type</li>
 
 <li>Checkout tag to local branch</li>
+
+<li>Choose commit from one branch and apply it to another</li>
 
 <li>Command substitution</li>
 
@@ -312,6 +318,8 @@ Error message and password prompt
 
 <li>Print out the contents of a vector</li>
 
+<li>Pull to your dirty working directory without committing any changes</li>
+
 <li>Qemu</li>
 
 <li>Qemu gdb stub</li>
@@ -382,6 +390,9 @@ Error message and password prompt
 </div>
 <div created="20170107171039082" modified="20170107171039082" title="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/new-journal">
 <pre>show</pre>
+</div>
+<div created="20180523070015592" modified="20180523070015592" title="$:/config/RelinkOnRename">
+<pre>yes</pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="TiddlyWiki5 core" list="readme" plugin-priority="0" plugin-type="plugin" title="$:/core" type="application/json" version="5.1.15">
 <pre>{
@@ -8670,7 +8681,7 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20180511114738075" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20180523071128668" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180501080503677" modified="20180501080557877" title="$:/state/tab-1749438307">
@@ -8691,6 +8702,9 @@ Error message and password prompt
 <div created="20180426123202724" modified="20180426123202724" title="$:/state/toc/Contents-Containers-209360082">
 <pre>open</pre>
 </div>
+<div created="20180523063826263" modified="20180523063826263" title="$:/state/toc/Contents-GIT TIPS-209360082">
+<pre>open</pre>
+</div>
 <div created="20180426091120972" modified="20180426091123364" title="$:/state/toc/Contents-Linux API-209360082">
 <pre>close</pre>
 </div>
@@ -8709,7 +8723,7 @@ Error message and password prompt
 <div created="20180427071406489" modified="20180427071406489" title="$:/state/toc/Contents/System management-Initrd/initramfs-209360082">
 <pre>open</pre>
 </div>
-<div list="[[Read logs by tag]] [[Install apk with adb]]" title="$:/StoryList">
+<div list="[[Pull to your dirty working directory without committing any changes]] [[Choose commit from one branch and apply it to another]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8870,7 +8884,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20170508164734500" modified="20171108082802176" tags="[[GIT TIPS]]" title="Add new remote and checkout a branch from it.">
+<div created="20170508164734500" modified="20180523065309229" tags="git [[GIT TIPS]]" title="Add new remote and checkout a branch from it.">
 <pre>!! Usefull links:
 
 [[Working with remotes|https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes]]
@@ -9433,7 +9447,7 @@ $ man 5 vconsole.conf
 ```
 </pre>
 </div>
-<div created="20170924130432402" modified="20170924132222761" tags="[[GIT TIPS]] howto" title="Change local commit">
+<div created="20170924130432402" modified="20180523065318734" tags="git [[GIT TIPS]] howto" title="Change local commit">
 <pre>!!Modify local commit message
 
 ```
@@ -9465,7 +9479,7 @@ lsblk -l
 
 </pre>
 </div>
-<div created="20171129153139887" modified="20171129153224630" tags="[[GIT TIPS]]" title="Checkout tag to local branch">
+<div created="20171129153139887" modified="20180523065332726" tags="git [[GIT TIPS]]" title="Checkout tag to local branch">
 <pre>!!First fetch all the tags to your local repository
 
 ```
@@ -9478,6 +9492,24 @@ git fetch --all --tags --prune
 ```
 git checkout tags/&lt;tag_name&gt; -b &lt;branch_name&gt;
 ```</pre>
+</div>
+<div created="20180523064524794" modified="20180523071053821" tags="git [[GIT TIPS]] cherry-pick" title="Choose commit from one branch and apply it to another">
+<pre>!!Go to branch you want to apply the commit to
+```
+&gt; git checkout branch1
+```
+
+!!Find the hash of the commit and cherry-pick it
+```
+&gt; git cherry-pick &lt;commit-hash&gt;
+```
+
+!!Resolve conflicts if necessary
+```
+&gt; git mergetool
+```
+
+[[Useful link|https://stackoverflow.com/questions/9339429/what-does-cherry-picking-a-commit-with-git-mean]]</pre>
 </div>
 <div created="20170918055318819" modified="20170918060157797" tags="Bash [[shell tips]]" title="Command substitution">
 <pre>Command substitution allows us to take output of the command or program and save it to the variable.
@@ -9537,7 +9569,7 @@ telnet 127.0.0.1 port
 &lt;&lt;toc-selective-expandable 'Contents' sort[title]&gt;&gt;
 &lt;/div&gt;</pre>
 </div>
-<div created="20170723133121349" modified="20170924132246366" tags="[[GIT TIPS]] howto" title="Delete unpushed git commits">
+<div created="20170723133121349" modified="20180523065344014" tags="git [[GIT TIPS]] howto" title="Delete unpushed git commits">
 <pre>!!Delete the most resent commit keeping the work
  ```
 &gt; git reset --soft HEAD~1
@@ -9725,7 +9757,7 @@ Print data from file in reverse order.
 ```
 </pre>
 </div>
-<div created="20170514184303931" modified="20170514184654579" tags="[[GIT TIPS]]" title="Handy log">
+<div created="20170514184303931" modified="20180523065258021" tags="git [[GIT TIPS]]" title="Handy log">
 <pre>!!Compact form of the commit log message
 
 ```
@@ -10412,7 +10444,7 @@ gnuplot&gt; plot 'xeno-test-result'
 gnuplot&gt; plot 'xeno-test-result' with lines 
 </pre>
 </div>
-<div created="20170320055259436" modified="20170723133614069" tags="[[GIT TIPS]] [[Linux kernel development]]" title="Prepare and send a patchset">
+<div created="20170320055259436" modified="20180523065549507" tags="git [[GIT TIPS]] [[Linux kernel development]]" title="Prepare and send a patchset">
 <pre>!! Usefull links:
 
 [[Firstpatch from kernelnewbies.com|https://kernelnewbies.org/Outreachyfirstpatch?action=show&amp;redirect=OPWfirstpatch#kernel-setup-done]]
@@ -10679,6 +10711,27 @@ Outputs:
 ```
 
 [[Good answer from stackoverflow|https://stackoverflow.com/questions/10750057/how-to-print-out-the-contents-of-a-vector]]</pre>
+</div>
+<div created="20180523065645414" modified="20180523071013502" tags="stash git [[GIT TIPS]]" title="Pull to your dirty working directory without committing any changes">
+<pre>!!Go to your working dirty directory and stash on it
+```
+&gt; git stash
+```
+
+!!Pull on it
+```
+&gt; git pull
+```
+
+!!Apply your changes to the new HEAD
+```
+&gt; git stash apply
+```
+
+!!Delete all the stashed states
+```
+&gt; git stash clear
+```</pre>
 </div>
 <div created="20180323065428892" modified="20180501081446764" tags="qemu Contents" title="Qemu">
 <pre>&lt;&lt;list-links &quot;[tag[Qemu]]&quot;&gt;&gt;</pre>
