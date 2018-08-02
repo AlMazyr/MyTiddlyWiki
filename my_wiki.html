@@ -238,8 +238,6 @@ Error message and password prompt
 
 <li>Contents</li>
 
-<li>Create snapshot</li>
-
 <li>Delete unpushed git commits</li>
 
 <li>English</li>
@@ -351,6 +349,8 @@ Error message and password prompt
 <li>Simple module which will be downloaded when any usb kbd plugged in</li>
 
 <li>Simple script which makes plot from file</li>
+
+<li>Snapshots</li>
 
 <li>Sound management</li>
 
@@ -8693,7 +8693,7 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20180801075030958" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20180802102113314" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180501080503677" modified="20180501080557877" title="$:/state/tab-1749438307">
@@ -8744,7 +8744,7 @@ Error message and password prompt
 <div created="20180704071155167" modified="20180704071157205" title="$:/state/toc/Contents/System management-Pacman-209360082">
 <pre>open</pre>
 </div>
-<div list="[[Linux kernel development]] [[Save output files to different folder]] [[Install kernel and modules to specific folder]] [[Fast kernel module development with QEMU]] [[Build Linux kernel with real time patch(CONFIG_PREEMPT_RT)]] [[Build and run custom kernel]]" title="$:/StoryList">
+<div list="Snapshots" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9589,15 +9589,6 @@ telnet 127.0.0.1 port
 <pre>&lt;div class='tc-table-of-contents'&gt;
 &lt;&lt;toc-selective-expandable 'Contents' sort[title]&gt;&gt;
 &lt;/div&gt;</pre>
-</div>
-<div created="20180704081419353" modified="20180704082157474" tags="qcow2 qemu Qemu" title="Create snapshot">
-<pre>!!Use [[qemu-img|https://linux.die.net/man/1/qemu-img]]
-
-To create snapshot-img.qcow2 for ubuntu-backing-img.qcow2:
-
-```
-&gt;  qemu-img create -f qcow2 -b ./ubuntu-backing-img.qcow2 ./snapshot-img.qcow2
-```</pre>
 </div>
 <div created="20170723133121349" modified="20180523065344014" tags="git [[GIT TIPS]] howto" title="Delete unpushed git commits">
 <pre>!!Delete the most resent commit keeping the work
@@ -10999,6 +10990,21 @@ plot name with lines
 pause -1
 ```
 </pre>
+</div>
+<div created="20180704081419353" modified="20180802102111130" tags="qcow2 qemu Qemu" title="Snapshots">
+<pre>!!Use [[qemu-img|https://linux.die.net/man/1/qemu-img]]
+
+To create snapshot-img.qcow2 for ubuntu-backing-img.qcow2:
+
+```
+&gt; qemu-img create -f qcow2 -b ./ubuntu-backing-img.qcow2 ./snapshot-img.qcow2
+```
+
+To commit changes from snapshot file to backing img:
+
+```
+&gt; qemu-img commit snapshot-img.qcow2
+```</pre>
 </div>
 <div created="20170820143304098" modified="20170820170630923" tags="[[System management]] arch howto" title="Sound management">
 <pre>!!To raise the volume:
