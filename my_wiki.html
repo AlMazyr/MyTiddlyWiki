@@ -250,6 +250,8 @@ Error message and password prompt
 
 <li>Draft of 'Snapshots'</li>
 
+<li>Dump report descriptors</li>
+
 <li>EFI</li>
 
 <li>English</li>
@@ -273,6 +275,8 @@ Error message and password prompt
 <li>Handy log</li>
 
 <li>Hello world</li>
+
+<li>HID</li>
 
 <li>House of cards</li>
 
@@ -8711,7 +8715,7 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20180906073022559" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20181024145908296" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180501080503677" modified="20180501080557877" title="$:/state/tab-1749438307">
@@ -8768,7 +8772,7 @@ Error message and password prompt
 <div created="20180704071155167" modified="20180815125948890" title="$:/state/toc/Contents/System management-Pacman-209360082">
 <pre>close</pre>
 </div>
-<div list="[[Build edk2 for arm64]] EFI" title="$:/StoryList">
+<div list="[[Dump report descriptors]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8965,7 +8969,7 @@ master
 ```
 </pre>
 </div>
-<div created="20180510071040357" modified="20180510071126290" tags="Contents" title="Android">
+<div created="20180510071040357" modified="20181024143047236" tags="Contents" title="Android">
 <pre>&lt;&lt;list-links &quot;[tag[Android]]&quot;&gt;&gt;</pre>
 </div>
 <div created="20171123114247835" modified="20180510071129425" tags="Contents" title="ARM">
@@ -9246,7 +9250,7 @@ cp u-boot.bin /mnt/tmp/
 umount /mnt/tmp
 ```</pre>
 </div>
-<div created="20180510071132323" modified="20180510071757752" tags="Android gradle" title="Build apk from command line">
+<div created="20180510071132323" modified="20181024143035517" tags="Android gradle" title="Build apk from command line">
 <pre>!! For building application in the Android [[gradle|https://docs.gradle.org/current/userguide/userguide.html]] build system is used
 
 To build your app run
@@ -9264,8 +9268,7 @@ To build your app with additional tests run
 To get more information about Android build system check [[this link|https://developer.android.com/studio/build/]]</pre>
 </div>
 <div created="20180906072239703" modified="20180906073017080" tags="ARM arm64 EFI efi" title="Build edk2 for arm64">
-<pre>
-!!Get sources from [[github|https://github.com/tianocore/edk2]]
+<pre>!!Get sources from [[github|https://github.com/tianocore/edk2]]
 
 !!Build base tools first
 
@@ -9686,6 +9689,109 @@ To commit changes from snapshot file to backing img:
 &gt; qemu-img commit snapshot-img.qcow2
 ```</pre>
 </div>
+<div created="20181024142944983" modified="20181024145840006" tags="usb hid HID" title="Dump report descriptors">
+<pre>!!To get report descriptors [[hidusb-dump|https://www.systutorials.com/docs/linux/man/8-usbhid-dump/]] is used
+
+To dump all HID devices on your system:
+
+```
+&gt; sudo usbhid-dump
+```
+To dump device with specific vendor id and product id pair `-d` option is used. E.g. to dump descriptor of the device with vid=0x045e and pid=0x00cb:
+
+```
+&gt; sudo usbhid-dump -d045e:00cb
+003:002:000:DESCRIPTOR         1540392904.288897
+ 05 01 09 02 A1 01 09 01 A1 00 05 09 19 01 29 03
+ 15 00 25 01 75 01 95 03 81 02 75 05 95 01 81 01
+ 05 01 09 30 09 31 09 38 15 81 25 7F 75 08 95 03
+ 81 06 C0 C0
+```
+To dump device by its bus address `-a` is used. To dump device with bus=3 and addr=2:
+
+```
+&gt; sudo usbhid-dump -a3:2
+003:002:000:DESCRIPTOR         1540392927.544905
+ 05 01 09 02 A1 01 09 01 A1 00 05 09 19 01 29 03
+ 15 00 25 01 75 01 95 03 81 02 75 05 95 01 81 01
+ 05 01 09 30 09 31 09 38 15 81 25 7F 75 08 95 03
+ 81 06 C0 C0
+```
+To see all the information about usb devices (vid, pid, bus addr) [[lsusb|https://linux.die.net/man/8/lsusb]] is used:
+
+```
+&gt; lsusb
+Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 003 Device 002: ID 045e:00cb Microsoft Corp. Basic Optical Mouse v2.0
+```
+!!To convert report descriptors to human readable formats [[hidrd|https://github.com/DIGImend/hidrd]] library is used
+
+To read report descriptor of the device with ID 045e:00cb in spec format:
+
+```
+&gt; sudo usbhid-dump -d045e:00cb | grep -v : | xxd -r -p | hidrd-convert -o spec
+Usage Page (Desktop),               ; Generic desktop controls (01h)
+Usage (Mouse),                      ; Mouse (02h, application collection)
+Collection (Application),
+    Usage (Pointer),                ; Pointer (01h, physical collection)
+    Collection (Physical),
+        Usage Page (Button),        ; Button (09h)
+        Usage Minimum (01h),
+        Usage Maximum (03h),
+        Logical Minimum (0),
+        Logical Maximum (1),
+        Report Size (1),
+        Report Count (3),
+        Input (Variable),
+        Report Size (5),
+        Report Count (1),
+        Input (Constant),
+        Usage Page (Desktop),       ; Generic desktop controls (01h)
+        Usage (X),                  ; X (30h, dynamic value)
+        Usage (Y),                  ; Y (31h, dynamic value)
+        Usage (Wheel),              ; Wheel (38h, dynamic value)
+        Logical Minimum (-127),
+        Logical Maximum (127),
+        Report Size (8),
+        Report Count (3),
+        Input (Variable, Relative),
+    End Collection,
+End Collection
+```
+
+To read in code format:
+
+```
+&gt; sudo usbhid-dump -d045e:00cb | grep -v : | xxd -r -p | hidrd-convert -o code
+ 0x05, 0x01, /*  Usage Page (Desktop),               */
+0x09, 0x02, /*  Usage (Mouse),                      */
+0xA1, 0x01, /*  Collection (Application),           */
+0x09, 0x01, /*      Usage (Pointer),                */
+0xA1, 0x00, /*      Collection (Physical),          */
+0x05, 0x09, /*          Usage Page (Button),        */
+0x19, 0x01, /*          Usage Minimum (01h),        */
+0x29, 0x03, /*          Usage Maximum (03h),        */
+0x15, 0x00, /*          Logical Minimum (0),        */
+0x25, 0x01, /*          Logical Maximum (1),        */
+0x75, 0x01, /*          Report Size (1),            */
+0x95, 0x03, /*          Report Count (3),           */
+0x81, 0x02, /*          Input (Variable),           */
+0x75, 0x05, /*          Report Size (5),            */
+0x95, 0x01, /*          Report Count (1),           */
+0x81, 0x01, /*          Input (Constant),           */
+0x05, 0x01, /*          Usage Page (Desktop),       */
+0x09, 0x30, /*          Usage (X),                  */
+0x09, 0x31, /*          Usage (Y),                  */
+0x09, 0x38, /*          Usage (Wheel),              */
+0x15, 0x81, /*          Logical Minimum (-127),     */
+0x25, 0x7F, /*          Logical Maximum (127),      */
+0x75, 0x08, /*          Report Size (8),            */
+0x95, 0x03, /*          Report Count (3),           */
+0x81, 0x06, /*          Input (Variable, Relative), */
+0xC0,       /*      End Collection,                 */
+0xC0        /*  End Collection                      */
+```</pre>
+</div>
 <div created="20180906072139549" modified="20180906072211817" tags="efi Contents" title="EFI">
 <pre>&lt;&lt;list-links &quot;[tag[EFI]]&quot;&gt;&gt;</pre>
 </div>
@@ -9946,6 +10052,9 @@ sudo rmmod hello
 ```
 
 You can see log messages from your module in `/val/log/syslog`</pre>
+</div>
+<div created="20181024142918073" modified="20181024143100853" tags="Contents" title="HID">
+<pre>&lt;&lt;list-links &quot;[tag[HID]]&quot;&gt;&gt;</pre>
 </div>
 <div created="20170120181539366" modified="20170204194015852" tags="[[TV series]]" title="House of cards">
 <pre>!First episode
