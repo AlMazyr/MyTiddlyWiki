@@ -250,7 +250,7 @@ Error message and password prompt
 
 <li>Convert raw to qcow2</li>
 
-<li>Delete unpushed git commits</li>
+<li>Delete git commits (local and remote)</li>
 
 <li>Draft of 'Snapshots'</li>
 
@@ -359,6 +359,8 @@ Error message and password prompt
 <li>Read file line by line</li>
 
 <li>Read logs by tag</li>
+
+<li>Rebase on the master branch</li>
 
 <li>Run your script when new device plugged in</li>
 
@@ -8719,7 +8721,7 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20181029112222009" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20181123102831435" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180501080503677" modified="20180501080557877" title="$:/state/tab-1749438307">
@@ -8782,7 +8784,7 @@ Error message and password prompt
 <div created="20180704071155167" modified="20180815125948890" title="$:/state/toc/Contents/System management-Pacman-209360082">
 <pre>close</pre>
 </div>
-<div list="[[Dump report descriptors]]" title="$:/StoryList">
+<div list="[[Rebase on the master branch]] [[Delete git commits (local and remote)]] [[Choose commit from one branch and apply it to another]] [[Change local commit]] [[Add new remote and checkout a branch from it.]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9706,16 +9708,34 @@ To compress image.img.raw to image.img.qcow2 run:
 &gt; qemu-img convert -c -f raw -O qcow2 image.img.raw image.img.qcow2
 ```</pre>
 </div>
-<div created="20170723133121349" modified="20180523065344014" tags="git [[GIT TIPS]] howto" title="Delete unpushed git commits">
-<pre>!!Delete the most resent commit keeping the work
+<div created="20170723133121349" modified="20181123101252936" tags="[[git branch]] git [[GIT TIPS]] howto" title="Delete git commits (local and remote)">
+<pre>!!Delete commit from local branch
+
+Delete the most resent commit keeping the work
+
  ```
 &gt; git reset --soft HEAD~1
 ```
 
-!!Delete the most resent commit destroying the work
+Delete the most resent commit destroying the work
+
 ```
 &gt; git reset --hard HEAD~1
 ```
+
+!!From remote branch
+
+First, delete commit from your local branch. See previous step.
+
+Then push your changes to remote branch
+
+Suppose you want to push your local branch `feature-branch` to remote `origin\feature-branch`
+
+```
+&gt; git push origin feature-branch -f
+```
+
+
 
 </pre>
 </div>
@@ -11083,6 +11103,24 @@ done &lt; &quot;$1&quot;
 
 ```
 &gt; adb logcat &quot;myTag:*&quot; &quot;*:S&quot;
+```</pre>
+</div>
+<div created="20181123101303796" modified="20181123102827884" tags="[[git rebase]] howto [[GIT TIPS]] git" title="Rebase on the master branch">
+<pre>Suppose you have your local `feature-branch` and `master` branches. `master` tracks remote `origin\master`
+
+```
+&gt; git branch -a
+* feature-branch
+  master
+  remotes/origin/master
+```
+
+To rebase your branch on the remote master
+
+```
+&gt; git fetch                                         // to get remote changes
+&gt; git checkout feature-branch
+&gt; git rebase master 
 ```</pre>
 </div>
 <div created="20170205181612133" modified="20170225153535729" tags="[[Linux kernel development]] howto" title="Run your script when new device plugged in">
