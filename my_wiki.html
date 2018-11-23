@@ -260,6 +260,8 @@ Error message and password prompt
 
 <li>English</li>
 
+<li>Event reports and properties supported by device</li>
+
 <li>Extract certain field from file by cut</li>
 
 <li>Extract fields from file</li>
@@ -8721,7 +8723,7 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20181123102831435" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20181123105053660" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180501080503677" modified="20180501080557877" title="$:/state/tab-1749438307">
@@ -8784,7 +8786,7 @@ Error message and password prompt
 <div created="20180704071155167" modified="20180815125948890" title="$:/state/toc/Contents/System management-Pacman-209360082">
 <pre>close</pre>
 </div>
-<div list="[[Rebase on the master branch]] [[Delete git commits (local and remote)]] [[Choose commit from one branch and apply it to another]] [[Change local commit]] [[Add new remote and checkout a branch from it.]]" title="$:/StoryList">
+<div list="[[Event reports and properties supported by device]] [[Check devices]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9549,7 +9551,7 @@ $ man 5 vconsole.conf
 &gt; git commit --amend
 ```</pre>
 </div>
-<div created="20180426091447328" modified="20181024151759970" tags="fftest evtest [[Linux input subsystem]] input linux" title="Check devices">
+<div created="20180426091447328" modified="20181123104459098" tags="fftest evtest [[Linux input subsystem]] input linux" title="Check devices">
 <pre>!!To get all the information about all the input devices [[evtest|http://manpages.ubuntu.com/manpages/trusty/man1/evtest.1.html]] is used
 
 To see list of devices:
@@ -9876,6 +9878,31 @@ To read in code format:
 </div>
 <div created="20170107165932737" modified="20170604150112175" tags="Learning" title="English">
 <pre>&lt;&lt;list-links &quot;[tag[English]]&quot;&gt;&gt;</pre>
+</div>
+<div created="20181123104143990" modified="20181123105034595" tags="evtest input linux [[Linux input subsystem]]" title="Event reports and properties supported by device">
+<pre>!!Use [[evtest|http://manpages.ubuntu.com/manpages/trusty/man1/evtest.1.html]] 
+
+```
+&gt; evtest
+```
+
+!!Use sysfs
+
+To check event reports supported by event0 device:
+
+```
+&gt; ls /sys/class/input/event0/device/capabilities
+abs  ev  ff  key  led  msc  rel  snd  sw
+&gt; cat /sys/class/input/event0/device/capabilities/ev
+3
+```
+
+To check event0 properies
+
+```
+&gt; cat /sys/class/input/event0/device/properties
+0
+```</pre>
 </div>
 <div created="20170831122707420" modified="20170916145748004" tags="[[System management]] [[shell tips]] howto cut" title="Extract certain field from file by cut">
 <pre>!!To extract certain fields from file use [[cut|https://linux.die.net/man/1/cut]]:
