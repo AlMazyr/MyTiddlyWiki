@@ -174,6 +174,8 @@ Error message and password prompt
 
 <li>$:/state/toc/Contents-System management-209360082</li>
 
+<li>$:/state/toc/Contents-Windows-209360082</li>
+
 <li>$:/state/toc/Contents/Linux kernel development-Initrd/initramfs-209360082</li>
 
 <li>$:/state/toc/Contents/Linux kernel development-Kernel debugging-209360082</li>
@@ -181,6 +183,8 @@ Error message and password prompt
 <li>$:/state/toc/Contents/System management-Initrd/initramfs-209360082</li>
 
 <li>$:/state/toc/Contents/System management-Pacman-209360082</li>
+
+<li>$:/state/toc/Contents/Windows-Windows-209360082</li>
 
 <li>$:/StoryList</li>
 
@@ -252,11 +256,17 @@ Error message and password prompt
 
 <li>Delete git commits (local and remote)</li>
 
+<li>Dis/en test mode</li>
+
+<li>Disable/enable digital signing check</li>
+
 <li>Draft of 'Snapshots'</li>
 
 <li>Dump report descriptors</li>
 
 <li>EFI</li>
+
+<li>Enable debug mode</li>
 
 <li>English</li>
 
@@ -409,6 +419,8 @@ Error message and password prompt
 <li>Update grub2 configuration</li>
 
 <li>Usefull tools howtos</li>
+
+<li>Windows</li>
 
 <li>Xenomai on Raspberry Pi 3 for arm64</li>
 
@@ -8723,7 +8735,7 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20181123105053660" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20190204103229139" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180501080503677" modified="20180501080557877" title="$:/state/tab-1749438307">
@@ -8774,6 +8786,9 @@ Error message and password prompt
 <div created="20180421170723848" modified="20180426125413717" title="$:/state/toc/Contents-System management-209360082">
 <pre>open</pre>
 </div>
+<div created="20190204093908502" modified="20190204093908502" title="$:/state/toc/Contents-Windows-209360082">
+<pre>open</pre>
+</div>
 <div created="20180427071402650" modified="20180704071223934" title="$:/state/toc/Contents/Linux kernel development-Initrd/initramfs-209360082">
 <pre>open</pre>
 </div>
@@ -8786,7 +8801,10 @@ Error message and password prompt
 <div created="20180704071155167" modified="20180815125948890" title="$:/state/toc/Contents/System management-Pacman-209360082">
 <pre>close</pre>
 </div>
-<div list="[[Event reports and properties supported by device]] [[Check devices]]" title="$:/StoryList">
+<div created="20190204093909990" modified="20190204093909991" title="$:/state/toc/Contents/Windows-Windows-209360082">
+<pre>open</pre>
+</div>
+<div list="[[Enable debug mode]] [[Dis/en test mode]] [[Disable/enable digital signing check]] Windows" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8983,7 +9001,7 @@ master
 ```
 </pre>
 </div>
-<div created="20180510071040357" modified="20181024143047236" tags="Contents" title="Android">
+<div created="20180510071040357" modified="20190204093903104" tags="Contents" title="Android">
 <pre>&lt;&lt;list-links &quot;[tag[Android]]&quot;&gt;&gt;</pre>
 </div>
 <div created="20171123114247835" modified="20180510071129425" tags="Contents" title="ARM">
@@ -9741,6 +9759,37 @@ Suppose you want to push your local branch `feature-branch` to remote `origin\fe
 
 </pre>
 </div>
+<div created="20190204101201590" modified="20190204103232475" tags="windows bcdedit Windows" title="Dis/en test mode">
+<pre>!! Using [[bcdedit|https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdedit-command-line-options]]
+
+To enable testmode:
+
+```
+&gt; bcdedit.exe /set testsigning ON
+```
+
+To disable
+
+```
+&gt; bcdedit.exe /set testsigning OFF
+```</pre>
+</div>
+<div created="20190204093942566" modified="20190204101348507" tags="bcdedit windows Windows" title="Disable/enable digital signing check">
+<pre>!! Using [[bcdedit|https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdedit-command-line-options]]
+
+To disable checks run from cmd as admin:
+
+```
+&gt; bcdedit /set nointegritychecks on
+```
+
+To enable:
+
+```
+&gt; bcdedit /set nointegritychecks off
+```
+</pre>
+</div>
 <div created="20180704081419353" draft.of="Snapshots" draft.title="Snapshots" modified="20180808104735330" tags="qemu-img qcow2 qemu Qemu" title="Draft of 'Snapshots'">
 <pre>!!Use [[qemu-img|https://linux.die.net/man/1/qemu-img]]
 
@@ -9875,6 +9924,20 @@ To read in code format:
 </div>
 <div created="20180906072139549" modified="20180906072211817" tags="efi Contents" title="EFI">
 <pre>&lt;&lt;list-links &quot;[tag[EFI]]&quot;&gt;&gt;</pre>
+</div>
+<div created="20190204102711943" modified="20190204103227059" tags="bcdedit windows Windows" title="Enable debug mode">
+<pre>!! Using [[bcdedit|https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdedit-command-line-options]]
+
+Start cmd as admin and run:
+
+```
+&gt; bcdedit /set debug on
+&gt; bcdedit /set debugtype serial
+&gt; bcdedit /set debugport 1
+&gt; bcdedit /set baudrate 115200
+&gt; bcdedit /set {bootmgr} displaybootmeny yes
+&gt; bcdedit /timeout 10
+```</pre>
 </div>
 <div created="20170107165932737" modified="20170604150112175" tags="Learning" title="English">
 <pre>&lt;&lt;list-links &quot;[tag[English]]&quot;&gt;&gt;</pre>
@@ -11473,6 +11536,9 @@ $ update-grub</pre>
 </div>
 <div created="20170212090848170" modified="20170212090940729" tags="Contents" title="Usefull tools howtos">
 <pre>&lt;&lt;list-links &quot;[tag[Usefull tools howtos]]&quot;&gt;&gt;</pre>
+</div>
+<div created="20190204093813952" modified="20190204094003516" tags="windows Contents" title="Windows">
+<pre>&lt;&lt;list-links &quot;[tag[Windows]]&quot;&gt;&gt;</pre>
 </div>
 <div created="20171123131418322" modified="20171124150959589" tags="[[Raspberry Pi]] xenomai arm64" title="Xenomai on Raspberry Pi 3 for arm64">
 <pre>!!Get the latest i-pipe patch for the kernel
