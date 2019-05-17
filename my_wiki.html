@@ -282,6 +282,8 @@ Error message and password prompt
 
 <li>Filters</li>
 
+<li>Get security descriptor</li>
+
 <li>GIT TIPS</li>
 
 <li>Gnuplot</li>
@@ -8737,7 +8739,7 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20190517134330741" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20190517154813615" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180501080503677" modified="20180501080557877" title="$:/state/tab-1749438307">
@@ -8806,7 +8808,7 @@ Error message and password prompt
 <div created="20190204093909990" modified="20190204093909991" title="$:/state/toc/Contents/Windows-Windows-209360082">
 <pre>open</pre>
 </div>
-<div list="" title="$:/StoryList">
+<div list="[[Get security descriptor]] [[Dis/en test mode]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -10114,6 +10116,16 @@ Remove duplicate files.
 Print data from file in reverse order.
 
 </pre>
+</div>
+<div created="20190517154443296" modified="20190517154811428" tags="powershell windows Windows" title="Get security descriptor">
+<pre>!Using [[powershell|https://en.wikipedia.org/wiki/PowerShell]]
+
+```
+&gt; Get-Acl -Path HKLM:\System\CurrentControlSet\Control | Format-List
+
+```
+
+In the example above [[security descriptor|https://docs.microsoft.com/en-us/windows/desktop/adsi/security-descriptors-on-files-and-registry-keys]] of the registry key will be retrieved.</pre>
 </div>
 <div created="20170320055133278" modified="20171123114517968" tags="Contents" title="GIT TIPS">
 <pre>&lt;&lt;list-links &quot;[tag[GIT TIPS]]&quot;&gt;&gt;</pre>
