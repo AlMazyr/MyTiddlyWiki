@@ -260,6 +260,8 @@ Error message and password prompt
 
 <li>Disable/enable digital signing check</li>
 
+<li>Draft of 'Dis/en test mode'</li>
+
 <li>Draft of 'Snapshots'</li>
 
 <li>Dump report descriptors</li>
@@ -373,6 +375,8 @@ Error message and password prompt
 <li>Read logs by tag</li>
 
 <li>Rebase on the master branch</li>
+
+<li>Run process under SYSTEM user</li>
 
 <li>Run your script when new device plugged in</li>
 
@@ -8735,7 +8739,7 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20190204103229139" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20190517134330741" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180501080503677" modified="20180501080557877" title="$:/state/tab-1749438307">
@@ -8804,7 +8808,7 @@ Error message and password prompt
 <div created="20190204093909990" modified="20190204093909991" title="$:/state/toc/Contents/Windows-Windows-209360082">
 <pre>open</pre>
 </div>
-<div list="[[Enable debug mode]] [[Dis/en test mode]] [[Disable/enable digital signing check]] Windows" title="$:/StoryList">
+<div list="[[Run process under SYSTEM user]] Windows [[Draft of 'Dis/en test mode']]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9759,7 +9763,7 @@ Suppose you want to push your local branch `feature-branch` to remote `origin\fe
 
 </pre>
 </div>
-<div created="20190204101201590" modified="20190204103232475" tags="windows bcdedit Windows" title="Dis/en test mode">
+<div created="20190204101201590" modified="20190517133902509" tags="windows bcdedit Windows" title="Dis/en test mode">
 <pre>!! Using [[bcdedit|https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdedit-command-line-options]]
 
 To enable testmode:
@@ -9789,6 +9793,21 @@ To enable:
 &gt; bcdedit /set nointegritychecks off
 ```
 </pre>
+</div>
+<div created="20190204101201590" draft.of="Dis/en test mode" draft.title="Dis/en test mode" modified="20190517134146706" tags="windows bcdedit Windows" title="Draft of 'Dis/en test mode'">
+<pre>!! Using [[bcdedit|https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdedit-command-line-options]]
+
+To enable testmode:
+
+```
+&gt; bcdedit.exe /set testsigning ON
+```
+
+To disable
+
+```
+&gt; bcdedit.exe /set testsigning OFF
+```</pre>
 </div>
 <div created="20180704081419353" draft.of="Snapshots" draft.title="Snapshots" modified="20180808104735330" tags="qemu-img qcow2 qemu Qemu" title="Draft of 'Snapshots'">
 <pre>!!Use [[qemu-img|https://linux.die.net/man/1/qemu-img]]
@@ -11212,6 +11231,16 @@ To rebase your branch on the remote master
 &gt; git checkout feature-branch
 &gt; git rebase master 
 ```</pre>
+</div>
+<div created="20190517133850182" modified="20190517134328510" tags="psexec windows Windows" title="Run process under SYSTEM user">
+<pre>!!Using [[psexec|https://technet.microsoft.com/ru-ru/sysinternals/dd443648.aspx?f=255&amp;MSPPError=-2147217396]]
+
+```
+&gt;  psexec -s -i regedit
+
+```
+
+In the example above regedit will be started under SYSTEM user</pre>
 </div>
 <div created="20170205181612133" modified="20170225153535729" tags="[[Linux kernel development]] howto" title="Run your script when new device plugged in">
 <pre>!!Usefull links:
