@@ -232,6 +232,8 @@ Error message and password prompt
 
 <li>Change console font size</li>
 
+<li>Change iso in the cdrom</li>
+
 <li>Change local commit</li>
 
 <li>Check devices</li>
@@ -8741,7 +8743,7 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20190517154813615" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20190715111523612" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180501080503677" modified="20180501080557877" title="$:/state/tab-1749438307">
@@ -8810,7 +8812,7 @@ Error message and password prompt
 <div created="20190204093909990" modified="20190204093909991" title="$:/state/toc/Contents/Windows-Windows-209360082">
 <pre>open</pre>
 </div>
-<div list="[[Activate hidden Admin]] [[Run process under SYSTEM user]]" title="$:/StoryList">
+<div list="[[Connection to Monitor]] [[Change iso in the cdrom]] Qemu" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8859,7 +8861,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20180426130539059" modified="20180808103906898" title="$:/temp/search">
+<div created="20180426130539059" modified="20190715110359202" title="$:/temp/search">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.15">
@@ -9566,6 +9568,26 @@ $ man 5 vconsole.conf
 ```
 </pre>
 </div>
+<div created="20190715110406346" modified="20190715111519614" tags="qemu Qemu" title="Change iso in the cdrom">
+<pre>!!!To find your cdrom connect to [[Qemu Monitor|Connection to Monitor]] and run:
+
+```
+(qemu) info block
+```
+!!!To remove cd from cdrom:
+
+```
+(qemu) eject ide1-cd0
+```
+
+!!!To insert iso:
+
+```
+(qemu) change ide1-cd0 ./iso/virtioinput.iso
+```
+
+</pre>
+</div>
 <div created="20170924130432402" modified="20180523065318734" tags="git [[GIT TIPS]] howto" title="Change local commit">
 <pre>!!Modify local commit message
 
@@ -9704,7 +9726,7 @@ Connect to qmp server
 telnet localhost 4444
 ```</pre>
 </div>
-<div created="20180323065513889" modified="20180815125906117" tags="telnet qemu Qemu" title="Connection to Monitor">
+<div created="20180323065513889" modified="20190715110445894" tags="telnet qemu Qemu" title="Connection to Monitor">
 <pre>!![[Telnet|https://tools.ietf.org/html/rfc854]]
 
 Run ''qemu'' with `-monitor telnet:127.0.0.1:port,server,nowait` option, when port is any free port.
