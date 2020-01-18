@@ -268,6 +268,8 @@ Error message and password prompt
 
 <li>Draft of 'Building and debugging'</li>
 
+<li>Draft of 'Create qcow2 image'</li>
+
 <li>Dump report descriptors</li>
 
 <li>EFI</li>
@@ -311,6 +313,8 @@ Error message and password prompt
 <li>Install apk with adb</li>
 
 <li>Install kernel and modules to specific folder</li>
+
+<li>Install ubuntu for arm64 inside of Qemu</li>
 
 <li>Journal</li>
 
@@ -8745,7 +8749,7 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20200118141842691" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20200118145924284" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180501080503677" modified="20180501080557877" title="$:/state/tab-1749438307">
@@ -8814,7 +8818,7 @@ Error message and password prompt
 <div created="20190204093909990" modified="20190204093909991" title="$:/state/toc/Contents/Windows-Windows-209360082">
 <pre>open</pre>
 </div>
-<div list="[[Create qcow2 image]] Qemu [[Draft of 'Building and debugging']]" title="$:/StoryList">
+<div list="[[Install ubuntu for arm64 inside of Qemu]] [[Draft of 'Create qcow2 image']] Qemu [[Draft of 'Building and debugging']]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9868,6 +9872,15 @@ Run qemu under [[gdb|https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf]]
 gdb --args qemu-system-x86_64 -smp 2 -m 1G -kernel vmlinuz -initrd initramfs.img 
 ```</pre>
 </div>
+<div created="20200118141036394" draft.of="Create qcow2 image" draft.title="Create qcow2 image" modified="20200118143827656" tags="qemu-img Qemu qemu" title="Draft of 'Create qcow2 image'">
+<pre>!!Use [[qemu-img|https://linux.die.net/man/1/qemu-img]]
+
+To create qcow image with size 10G run:
+
+```
+&gt; qemu-img create -f qcow2 ubuntu_arm64.qcow2 10G
+```</pre>
+</div>
 <div created="20181024142944983" modified="20181029112220069" tags="usb hid HID" title="Dump report descriptors">
 <pre>!!Dump report descriptors 
 To get report descriptor [[hidusb-dump|https://www.systutorials.com/docs/linux/man/8-usbhid-dump/]] is used
@@ -10501,6 +10514,38 @@ make INSTALL_MOD_PATH=~/mount modules_install
 ```
 
 </pre>
+</div>
+<div created="20200118143729281" modified="20200118145921486" tags="ARM arm64 Qemu qemu" title="Install ubuntu for arm64 inside of Qemu">
+<pre>!!!1) Get uefi image from Linaro:
+
+```
+&gt; wget https://releases.linaro.org/components/kernel/uefi-linaro/latest/release/qemu64/QEMU_EFI.fd
+```
+!!!2) Get ubuntu iso image from [[here|https://ubuntu.com/download/server/arm]]:
+
+```
+&gt; wget http://cdimage.ubuntu.com/releases/18.04/release/ubuntu-18.04.3-server-arm64.iso
+```
+
+!!!3) Create qcow2 image:
+
+```
+&gt; qemu-img create -f qcow2 ubuntu_arm64.qcow2 10G
+```
+
+!!!4) Install qemu and run:
+
+```
+&gt; qemu-system-aarch64 \
+-M virt \
+-cpu cortex-a57 \
+-nographic \
+-smp 1 \
+-bios QEMU_EFI.fd \
+-m 1024 \
+-device virtio-blk-pci,drive=hd0 \
+-drive if=none,file=ubuntu_arm64.qcow2,id=hd0 \-
+cdrom ubuntu-18.04.3-server-arm64.iso</pre>
 </div>
 <div created="20170107171153456" modified="20170107171153456" tags="Contents" title="Journal">
 <pre></pre>
