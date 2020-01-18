@@ -258,13 +258,15 @@ Error message and password prompt
 
 <li>Convert raw to qcow2</li>
 
+<li>Create qcow2 image</li>
+
 <li>Delete git commits (local and remote)</li>
 
 <li>Dis/en test mode</li>
 
 <li>Disable/enable digital signing check</li>
 
-<li>Draft of 'Snapshots'</li>
+<li>Draft of 'Building and debugging'</li>
 
 <li>Dump report descriptors</li>
 
@@ -8743,7 +8745,7 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20190715111523612" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20200118141842691" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180501080503677" modified="20180501080557877" title="$:/state/tab-1749438307">
@@ -8812,7 +8814,7 @@ Error message and password prompt
 <div created="20190204093909990" modified="20190204093909991" title="$:/state/toc/Contents/Windows-Windows-209360082">
 <pre>open</pre>
 </div>
-<div list="[[Connection to Monitor]] [[Change iso in the cdrom]] Qemu" title="$:/StoryList">
+<div list="[[Create qcow2 image]] Qemu [[Draft of 'Building and debugging']]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8828,7 +8830,7 @@ Error message and password prompt
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
-            &quot;text&quot;: &quot;file:///home/alex_mazyrin/git/MyTiddlyWiki/my_wiki.html&quot;
+            &quot;text&quot;: &quot;file:///home/alex/git/MyTiddlyWiki/my_wiki.html&quot;
         },
         &quot;$:/info/url/host&quot;: {
             &quot;title&quot;: &quot;$:/info/url/host&quot;,
@@ -8848,7 +8850,7 @@ Error message and password prompt
         },
         &quot;$:/info/url/pathname&quot;: {
             &quot;title&quot;: &quot;$:/info/url/pathname&quot;,
-            &quot;text&quot;: &quot;/home/alex_mazyrin/git/MyTiddlyWiki/my_wiki.html&quot;
+            &quot;text&quot;: &quot;/home/alex/git/MyTiddlyWiki/my_wiki.html&quot;
         },
         &quot;$:/info/url/search&quot;: {
             &quot;title&quot;: &quot;$:/info/url/search&quot;,
@@ -8861,8 +8863,8 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20180426130539059" modified="20190715110359202" title="$:/temp/search">
-<pre></pre>
+<div created="20180426130539059" modified="20200118140706843" title="$:/temp/search">
+<pre>qemu</pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.15">
 <pre>{
@@ -9493,7 +9495,7 @@ $ modprobe i2c-i801
 ```
 </pre>
 </div>
-<div created="20180421113444752" modified="20180421154320717" tags="gdb qemu Qemu" title="Building and debugging">
+<div created="20180421113444752" modified="20200118141033294" tags="gdb qemu Qemu" title="Building and debugging">
 <pre>!!Building
 
 Clone [[qemu|https://www.qemu.org/]] from github
@@ -9763,6 +9765,15 @@ To compress image.img.raw to image.img.qcow2 run:
 &gt; qemu-img convert -c -f raw -O qcow2 image.img.raw image.img.qcow2
 ```</pre>
 </div>
+<div created="20200118141036394" modified="20200118141835688" tags="qemu-img Qemu qemu" title="Create qcow2 image">
+<pre>!!Use [[qemu-img|https://linux.die.net/man/1/qemu-img]]
+
+To create qcow image with size 10G run:
+
+```
+&gt; qemu-img create -f qcow2 ubuntu_arm64.qcow2 10G
+```</pre>
+</div>
 <div created="20170723133121349" modified="20181123101252936" tags="[[git branch]] git [[GIT TIPS]] howto" title="Delete git commits (local and remote)">
 <pre>!!Delete commit from local branch
 
@@ -9825,19 +9836,36 @@ To enable:
 ```
 </pre>
 </div>
-<div created="20180704081419353" draft.of="Snapshots" draft.title="Snapshots" modified="20180808104735330" tags="qemu-img qcow2 qemu Qemu" title="Draft of 'Snapshots'">
-<pre>!!Use [[qemu-img|https://linux.die.net/man/1/qemu-img]]
+<div created="20180421113444752" draft.of="Building and debugging" draft.title="Building and debugging" modified="20200118141505997" tags="gdb qemu Qemu" title="Draft of 'Building and debugging'">
+<pre>!!Building
 
-To create snapshot-img.qcow2 for ubuntu-backing-img.qcow2:
-
-```
-&gt; qemu-img create -f qcow2 -b ./ubuntu-backing-img.qcow2 ./snapshot-img.qcow2
-```
-
-To commit changes from snapshot file to backing img:
+Clone [[qemu|https://www.qemu.org/]] from github
 
 ```
-&gt; qemu-img commit snapshot-img.qcow2
+&gt; git clone https://github.com/qemu/qemu.git
+```
+
+Prepare for building
+
+```
+&gt; mkdir build
+&gt; cd build
+&gt; ../configure --target-list=aarch64-softmmu,x86_64-softmmu --enable-debug --disable-werror
+```
+
+Build and install
+
+```
+&gt; make -j4
+&gt; sudo make install
+```
+
+!!Debugging
+
+Run qemu under [[gdb|https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf]]
+
+```
+gdb --args qemu-system-x86_64 -smp 2 -m 1G -kernel vmlinuz -initrd initramfs.img 
 ```</pre>
 </div>
 <div created="20181024142944983" modified="20181029112220069" tags="usb hid HID" title="Dump report descriptors">
@@ -11473,7 +11501,7 @@ pause -1
 ```
 </pre>
 </div>
-<div created="20180704081419353" modified="20180806070848496" tags="qemu-img qcow2 qemu Qemu" title="Snapshots">
+<div created="20180704081419353" modified="20200118140746307" tags="qemu-img qcow2 qemu Qemu" title="Snapshots">
 <pre>!!Use [[qemu-img|https://linux.die.net/man/1/qemu-img]]
 
 To create snapshot-img.qcow2 for ubuntu-backing-img.qcow2:
