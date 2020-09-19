@@ -162,6 +162,8 @@ Error message and password prompt
 
 <li>$:/state/toc/Contents-HID-209360082</li>
 
+<li>$:/state/toc/Contents-Learning-209360082</li>
+
 <li>$:/state/toc/Contents-Linux API-209360082</li>
 
 <li>$:/state/toc/Contents-Linux input subsystem-209360082</li>
@@ -175,6 +177,8 @@ Error message and password prompt
 <li>$:/state/toc/Contents-System management-209360082</li>
 
 <li>$:/state/toc/Contents-Windows-209360082</li>
+
+<li>$:/state/toc/Contents/Containers-LXC-209360082</li>
 
 <li>$:/state/toc/Contents/Linux kernel development-Initrd/initramfs-209360082</li>
 
@@ -315,6 +319,8 @@ Error message and password prompt
 <li>Install kernel and modules to specific folder</li>
 
 <li>Install ubuntu for arm64 inside of Qemu</li>
+
+<li>IO performance</li>
 
 <li>Journal</li>
 
@@ -8749,7 +8755,7 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20200118145924284" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20200919133608632" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180501080503677" modified="20180501080557877" title="$:/state/tab-1749438307">
@@ -8782,13 +8788,16 @@ Error message and password prompt
 <div created="20181029110524353" modified="20181029110524353" title="$:/state/toc/Contents-HID-209360082">
 <pre>open</pre>
 </div>
-<div created="20180426091120972" modified="20180426091123364" title="$:/state/toc/Contents-Linux API-209360082">
-<pre>close</pre>
+<div created="20200919130708263" modified="20200919130708263" title="$:/state/toc/Contents-Learning-209360082">
+<pre>open</pre>
+</div>
+<div created="20180426091120972" modified="20200919130625625" title="$:/state/toc/Contents-Linux API-209360082">
+<pre>open</pre>
 </div>
 <div created="20180815125939002" modified="20180815125939002" title="$:/state/toc/Contents-Linux input subsystem-209360082">
 <pre>open</pre>
 </div>
-<div created="20180426091131300" modified="20180815125937834" title="$:/state/toc/Contents-Linux kernel development-209360082">
+<div created="20180426091131300" modified="20200919130713168" title="$:/state/toc/Contents-Linux kernel development-209360082">
 <pre>close</pre>
 </div>
 <div created="20180421170729288" modified="20180704065548002" title="$:/state/toc/Contents-Qemu-209360082">
@@ -8801,6 +8810,9 @@ Error message and password prompt
 <pre>open</pre>
 </div>
 <div created="20190204093908502" modified="20190204093908502" title="$:/state/toc/Contents-Windows-209360082">
+<pre>open</pre>
+</div>
+<div created="20200919130700190" modified="20200919130700190" title="$:/state/toc/Contents/Containers-LXC-209360082">
 <pre>open</pre>
 </div>
 <div created="20180427071402650" modified="20180704071223934" title="$:/state/toc/Contents/Linux kernel development-Initrd/initramfs-209360082">
@@ -8818,7 +8830,7 @@ Error message and password prompt
 <div created="20190204093909990" modified="20190204093909991" title="$:/state/toc/Contents/Windows-Windows-209360082">
 <pre>open</pre>
 </div>
-<div list="[[Install ubuntu for arm64 inside of Qemu]] [[Draft of 'Create qcow2 image']] Qemu [[Draft of 'Building and debugging']]" title="$:/StoryList">
+<div list="[[IO performance]] [[System management]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8867,8 +8879,8 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20180426130539059" modified="20200118140706843" title="$:/temp/search">
-<pre>qemu</pre>
+<div created="20180426130539059" modified="20200919133620862" title="$:/temp/search">
+<pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.15">
 <pre>{
@@ -9534,7 +9546,7 @@ gdb --args qemu-system-x86_64 -smp 2 -m 1G -kernel vmlinuz -initrd initramfs.img
 <div created="20180321144424895" modified="20180321144506767" tags="Contents" title="C++">
 <pre>&lt;&lt;list-links &quot;[tag[C++]]&quot;&gt;&gt;</pre>
 </div>
-<div created="20170712081021365" modified="20170820170302115" tags="[[System management]] howto [[shell tips]]" title="Calculate line count in an output">
+<div created="20170712081021365" modified="20200919133601440" tags="[[System management]] howto [[shell tips]]" title="Calculate line count in an output">
 <pre>!! To calculate the number of lines in an output use [[wc -l|https://linux.die.net/man/1/wc]] command
 
 The command above will calculate the number of cores in your machine
@@ -10546,6 +10558,25 @@ make INSTALL_MOD_PATH=~/mount modules_install
 -device virtio-blk-pci,drive=hd0 \
 -drive if=none,file=ubuntu_arm64.qcow2,id=hd0 \-
 cdrom ubuntu-18.04.3-server-arm64.iso</pre>
+</div>
+<div created="20200919132703513" modified="20200919133633340" tags="iostat block [[System management]]" title="IO performance">
+<pre>!!Measure read performance for /dev/sdb disk
+
+```
+$ dd if=/dev/sdb of=/dev/zero bs=1M count=1024 iflag=direct
+```
+
+!!Measure writing performance for /tmp 
+
+```
+$ dd if=/dev/zero of=/tmp/test1.img bs=1G count=1 oflag=dsync
+```
+
+!!IO performance monitoring for each disk in the system
+
+```
+$ iostat -dxk 1
+```</pre>
 </div>
 <div created="20170107171153456" modified="20170107171153456" tags="Contents" title="Journal">
 <pre></pre>
