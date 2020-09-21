@@ -8755,7 +8755,7 @@ Error message and password prompt
 <div created="20180422092826118" modified="20180422092826118" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20180421170742562" modified="20200919133608632" title="$:/state/sidebar">
+<div created="20180421170742562" modified="20200921185717854" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20180501080503677" modified="20180501080557877" title="$:/state/tab-1749438307">
@@ -8830,7 +8830,7 @@ Error message and password prompt
 <div created="20190204093909990" modified="20190204093909991" title="$:/state/toc/Contents/Windows-Windows-209360082">
 <pre>open</pre>
 </div>
-<div list="[[IO performance]] [[System management]]" title="$:/StoryList">
+<div list="[[IO performance]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8879,7 +8879,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20180426130539059" modified="20200919133620862" title="$:/temp/search">
+<div created="20180426130539059" modified="20200921184238168" title="$:/temp/search">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.15">
@@ -10559,7 +10559,7 @@ make INSTALL_MOD_PATH=~/mount modules_install
 -drive if=none,file=ubuntu_arm64.qcow2,id=hd0 \-
 cdrom ubuntu-18.04.3-server-arm64.iso</pre>
 </div>
-<div created="20200919132703513" modified="20200919133633340" tags="iostat block [[System management]]" title="IO performance">
+<div created="20200919132703513" modified="20200921185647502" tags="iostat block [[System management]]" title="IO performance">
 <pre>!!Measure read performance for /dev/sdb disk
 
 ```
@@ -10576,6 +10576,29 @@ $ dd if=/dev/zero of=/tmp/test1.img bs=1G count=1 oflag=dsync
 
 ```
 $ iostat -dxk 1
+```
+
+!!Run blktrace on /dev/sdb for 10 sec and write results to trace.blktrace.* files
+```
+$ blktrace -d /dev/sdb -o trace -w 10
+```
+
+!!Parse data from trace.blktrace.* files
+```
+$ blkparse -i trace.blktrace.*
+```
+!!Dump data from trace.blktrace.* files to sdb.bin file
+```
+$ blkparse -i trace.blktrace.* -d sdb.bin
+```
+!!Prepare report for IO tracing
+```
+$ btt -i sdb.bin
+```
+
+!!Simple combination of blktrace and blkparse
+```
+$ btrace /dev/sdb
 ```</pre>
 </div>
 <div created="20170107171153456" modified="20170107171153456" tags="Contents" title="Journal">
